@@ -75,7 +75,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_share -> {
-
+                var i:Intent = Intent(this, Register::class.java)
+                startActivity(i)
             }
         }
 
