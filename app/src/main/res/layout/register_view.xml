@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                             android:layout_height="match_parent">
+
+    <TextView
+            android:text="TextView"
+            android:layout_width="107dp"
+            android:layout_height="41dp" tools:layout_editor_absoluteY="346dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="36dp" android:id="@+id/textView4"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="107dp"
+            android:layout_height="39dp" tools:layout_editor_absoluteY="437dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="36dp" android:id="@+id/textView5"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="107dp"
+            android:layout_height="39dp" tools:layout_editor_absoluteY="525dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="36dp" android:id="@+id/textView6"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="Name"
+            android:ems="10"
+            tools:layout_editor_absoluteY="260dp" android:id="@+id/usernameRegister" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.879"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            tools:layout_editor_absoluteY="343dp" tools:layout_editor_absoluteX="168dp"
+            android:id="@+id/emailRegister"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            tools:layout_editor_absoluteX="168dp" android:id="@+id/passwordOneRegister"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.628"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            tools:layout_editor_absoluteY="519dp" tools:layout_editor_absoluteX="161dp"
+            android:id="@+id/passwordTwoRegister"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="107dp"
+            android:layout_height="39dp"
+            android:id="@+id/textView"
+            tools:layout_editor_absoluteX="36dp" tools:layout_editor_absoluteY="269dp"/>
+    <Button
+            android:text="Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" tools:layout_editor_absoluteY="626dp"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/registerButton"/>
+    <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="282dp"
+            android:src="@drawable/pic" app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/usernameRegister" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:id="@+id/imageView4"/>
+</android.support.constraint.ConstraintLayout>
