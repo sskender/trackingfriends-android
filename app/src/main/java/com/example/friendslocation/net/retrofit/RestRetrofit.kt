@@ -5,8 +5,6 @@ import com.example.friendslocation.entity.User
 import com.example.friendslocation.entity.UserPublicProfile
 import com.example.friendslocation.net.RestFactory
 import com.example.friendslocation.net.RestInterface
-import retrofit2.Call
-import retrofit2.Response
 import retrofit2.Retrofit
 
 class RestRetrofit : RestInterface {
@@ -26,69 +24,47 @@ class RestRetrofit : RestInterface {
     }
 
     override fun registerUser(user: User): UserPublicProfile? {
-        val call: Call<UserPublicProfile> = userService.register(user)
-        val response: Response<UserPublicProfile> = call.execute()
-
-        if (response.isSuccessful) {
-            return response.body()
-        } else {
-            TODO("not implemented")
-        }
+        return userService.register(user).execute().body()
     }
 
     override fun loginUser(user: User): UserPublicProfile? {
-        val call: Call<UserPublicProfile> = userService.login(user)
-        val response: Response<UserPublicProfile> = call.execute()
-
-        if (response.isSuccessful) {
-            return response.body()
-        } else {
-            TODO("not implemented")
-        }
+        return userService.login(user).execute().body()
     }
 
     override fun getUserProfileById(userId: String): UserPublicProfile? {
-        val call: Call<UserPublicProfile> = userService.userProfileById(userId)
-        val response: Response<UserPublicProfile> = call.execute()
-
-        if (response.isSuccessful) {
-            return response.body()
-        } else {
-            TODO("not implemented")
-        }
+        return userService.userProfileById(userId).execute().body()
     }
 
     override fun updateUserProfile(user: User): UserPublicProfile? {
-        val call: Call<UserPublicProfile> = userService.updateProfile(user.userId, user)
-        val response: Response<UserPublicProfile> = call.execute()
-
-        if (response.isSuccessful) {
-            return response.body()
-        } else {
-            TODO("not implemented")
-        }
+        return userService.updateProfile(user.userId, user).execute().body()
     }
 
     override fun updateUserLocation(location: Location): Location? {
-        val call: Call<Location> = locationService.updateLocation(location.userId, location)
-        val response: Response<Location> = call.execute()
-
-        if (response.isSuccessful) {
-            return response.body()
-        } else {
-            TODO("not implemented")
-        }
+        return locationService.updateLocation(location.userId, location).execute().body()
     }
 
     override fun getFriendsLocation(userId: String, friendId: String): Location? {
-        val call: Call<Location> = locationService.friendLocation(userId, friendId)
-        val response: Response<Location> = call.execute()
+        return locationService.friendLocation(userId, friendId).execute().body()
+    }
 
-        if (response.isSuccessful) {
-            return response.body()
-        } else {
-            TODO("not implemented")
-        }
+    override fun getUserFriends() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getUserFriendRequests() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun sendFriendRequest(userId: String, friendId: String): Void? {
+        return userService.sendFriendRequestAction(userId, friendId, "request").execute().body()
+    }
+
+    override fun acceptFriendRequest(userId: String, friendId: String): Void? {
+        return userService.sendFriendRequestAction(userId, friendId, "accept").execute().body()
+    }
+
+    override fun denyFriendRequest(userId: String, friendId: String): Void? {
+        return userService.sendFriendRequestAction(userId, friendId, "deny").execute().body()
     }
 
 }
