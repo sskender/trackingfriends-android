@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-            var i:Intent = Intent(this, Map::class.java)
+            var i:Intent = Intent(this, Login::class.java)
             startActivity(i)
         }
 
