@@ -36,6 +36,13 @@ class Map: FragmentActivity(), OnMapReadyCallback {
         map.moveCamera(CameraUpdateFactory.newLatLng(maracana))
         Log.d("sss","ddd")
 
+
+        maracana = LatLng(40.799338, 15.981387)
+
+        map.addMarker(MarkerOptions().position(maracana).title("MACARANAA").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+        map.moveCamera(CameraUpdateFactory.newLatLng(maracana))
+        Log.d("sss","ddd")
+
         /*
         googleMap.setOnMapLoadedCallback {
             var maracana: LatLng=LatLng(45.799338, 15.981387)

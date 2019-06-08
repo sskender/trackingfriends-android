@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.login_view.*
 import android.content.Intent
+import kotlinx.android.synthetic.main.content_main.*
 import kotlin.Any
 
 
@@ -21,6 +22,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
+        buttonMap.setOnClickListener { view ->
+            var i:Intent = Intent(this, Map::class.java)
+            startActivity(i)
+        }
 
 
 
