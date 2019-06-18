@@ -19,25 +19,25 @@ interface UserService {
         @Body user: User
     ): Call<UserPublicProfile>
 
-    @GET("/user/{userId}")
+    @GET("user/{userId}")
     @Headers("Accept-Encoding: application/json")
     fun userProfileById(
-        @Path("userId") userId: String?
+        @Path("userId") userId: String
     ): Call<UserPublicProfile>
 
-    @POST("/user/{userId}/update")
+    @POST("user/{userId}/update")
     @Headers("Accept-Encoding: application/json")
     fun updateProfile(
-        @Path("userId") userId: String?,
-        @Body user: User?
+        @Path("userId") userId: String,
+        @Body user: User
     ): Call<UserPublicProfile>
 
-    @POST("/user/{userId}/friends")
+    @POST("user/{userId}/friends")
     @Headers("Accept-Encoding: application/json")
     fun sendFriendRequestAction(
-        @Path("userId") userId: String?,
-        @Query("friendId") friendId: String?,
-        @Query("action") action: String?
+        @Path("userId") userId: String,
+        @Query("friendId") friendId: String,
+        @Query("action") action: String
     ): Call<Void>
 
 }

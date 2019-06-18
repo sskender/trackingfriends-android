@@ -6,12 +6,18 @@ import retrofit2.http.*
 
 interface LocationService {
 
-    @POST("/user/{userId}/location")
+    @POST("user/{userId}/location")
     @Headers("Accept-Encoding: application/json")
-    fun updateLocation(@Path("userId") userId: String?, @Body location: Location?): Call<Location>
+    fun updateLocation(
+        @Path("userId") userId: String,
+        @Body location: Location
+    ): Call<Location>
 
-    @GET("/user/{userId}/location/{friendId}")
+    @GET("user/{userId}/location/{friendId}")
     @Headers("Accept-Encoding: application/json")
-    fun friendLocation(@Path("userId") userId: String?, @Path("friendId") friendId: String?): Call<Location>
+    fun friendLocation(
+        @Path("userId") userId: String,
+        @Path("friendId") friendId: String
+    ): Call<Location>
 
 }
