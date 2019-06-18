@@ -12,6 +12,10 @@ class AppConstants {
         const val SERVER_URL: String = "http://$SERVER_IP:$SERVER_PORT/api/v1/"
 
 
+        // login register verification
+        const val PASSWORD_MIN_LEN = 8
+
+
         // friend request
         const val FRIEND_SEND_REQUEST: String = "request"
         const val FRIEND_ACCEPT_REQUEST: String = "accept"

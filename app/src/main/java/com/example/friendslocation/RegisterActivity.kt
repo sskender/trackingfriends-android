@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.EditText
 import android.widget.Toast
 import com.example.friendslocation.entity.User
+import com.example.friendslocation.misc.AppConstants
 import com.example.friendslocation.tasks.RegisterUserTask
 import kotlinx.android.synthetic.main.register_view.*
 import java.lang.ref.WeakReference
@@ -27,7 +28,7 @@ class RegisterActivity: AppCompatActivity() {
                 Toast.makeText(this, "Fields can't be empty!", Toast.LENGTH_LONG).show()
             } else if (password1 != password2) {
                 Toast.makeText(this, "Passwords don't match!", Toast.LENGTH_LONG).show()
-            } else if (password1.length < 8) {
+            } else if (password1.length < AppConstants.PASSWORD_MIN_LEN) {
                 Toast.makeText(this, "Password is too short!", Toast.LENGTH_LONG).show()
             }
             else{
