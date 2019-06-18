@@ -7,16 +7,16 @@ import retrofit2.http.*
 
 interface UserService {
 
-    @POST("/user/register")
+    @POST("user/register")
     @Headers("Accept-Encoding: application/json")
     fun register(
-        @Body user: User?
+        @Body user: User
     ): Call<UserPublicProfile>
 
-    @POST("/user/login")
+    @POST("user/login")
     @Headers("Accept-Encoding: application/json")
     fun login(
-        @Body user: User?
+        @Body user: User
     ): Call<UserPublicProfile>
 
     @GET("/user/{userId}")
