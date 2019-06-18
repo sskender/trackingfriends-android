@@ -10,5 +10,5 @@ import java.io.Serializable
  */
 data class UserPublicProfile(
     var userId: String,
-    var displayName: String
+    var username: String
 ) : Serializable
