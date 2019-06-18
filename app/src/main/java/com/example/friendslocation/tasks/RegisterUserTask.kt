@@ -1,11 +1,14 @@
 package com.example.friendslocation.tasks
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.AsyncTask
-import android.util.Log
 import android.widget.Toast
+import com.example.friendslocation.HomeActivity
 import com.example.friendslocation.entity.User
 import com.example.friendslocation.entity.UserPublicProfile
+import com.example.friendslocation.misc.AppConstants
 import com.example.friendslocation.net.RestFactory
 import java.lang.ref.WeakReference
 
@@ -19,9 +22,17 @@ class RegisterUserTask(private val contextReference: WeakReference<Context>) :
 
     override fun onPostExecute(result: UserPublicProfile?) {
         if (result == null) {
-            Toast.makeText(contextReference.get(), "Email already taken", Toast.LENGTH_LONG).show()
+            Toast.makeText(contextReference.get(), "Email already taken!", Toast.LENGTH_LONG).show()
+
         } else {
-            Log.d("USER", result.toString())
+            // start home activity
+            // pass user public profile retrieved from server
+
+            val homeActivityWithExtra = Intent(contextReference.get(), HomeActivity::class.java)
+            homeActivityWithExtra.putExtra(AppConstants.USER_PROFILE_INTENT_EXTRA, result)
+
+            (contextReference.get() as Activity).startActivity(homeActivityWithExtra)
+
         }
     }
 

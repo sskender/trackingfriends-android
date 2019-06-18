@@ -3,6 +3,7 @@ package com.example.friendslocation
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import com.example.friendslocation.entity.User
 import com.example.friendslocation.tasks.LoginUserTask
 import kotlinx.android.synthetic.main.login_view.*
@@ -22,9 +23,13 @@ class LoginActivity: AppCompatActivity() {
             val email = emailLogin.text.toString()
             val password = passwordLogin.text.toString()
 
-            val user: User = User("", "", email, password)
+            if (email.isEmpty() || password.length < 8) {
+                Toast.makeText(this, "Invalid credentials!", Toast.LENGTH_LONG).show()
+            } else {
+                val user: User = User("", "", email, password)
 
-            LoginUserTask(WeakReference(this)).execute(user)
+                LoginUserTask(WeakReference(this)).execute(user)
+            }
         }
 
 

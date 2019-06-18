@@ -23,10 +23,12 @@ class RegisterActivity: AppCompatActivity() {
             val password2 = (findViewById<EditText>(R.id.passwordTwoRegister)).text.toString()
             val email = (findViewById<EditText>(R.id.emailRegister)).text.toString()
 
-            if (password1 != password2) {
-                Toast.makeText(this,"Passwords don't match!",
-                    Toast.LENGTH_LONG
-                ).show()
+            if (username.isEmpty() || email.isEmpty()) {
+                Toast.makeText(this, "Fields can't be empty!", Toast.LENGTH_LONG).show()
+            } else if (password1 != password2) {
+                Toast.makeText(this, "Passwords don't match!", Toast.LENGTH_LONG).show()
+            } else if (password1.length < 8) {
+                Toast.makeText(this, "Password is too short!", Toast.LENGTH_LONG).show()
             }
             else{
                 val user: User = User("", username, email, password1)
