@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:gravity = "center"
         android:fitsSystemWindows="true"
-        tools:context=".Login">
+        tools:context=".LoginActivity">
     <EditText
             android:layout_width="173dp"
             android:layout_height="43dp"

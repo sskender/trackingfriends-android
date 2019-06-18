@@ -3,12 +3,11 @@ package com.example.friendslocation
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import kotlinx.android.synthetic.main.register_view.*
 
-class Register: AppCompatActivity() {
+class RegisterActivity: AppCompatActivity() {
     var username: String?=null
     var password: String?=null
     var password2: String?=null
@@ -30,7 +29,7 @@ class Register: AppCompatActivity() {
                     Toast.LENGTH_LONG).show();
             }
             else{
-                var i:Intent = Intent(this, MainActivity::class.java)
+                var i:Intent = Intent(this, HomeActivity::class.java)
                 startActivity(i)
             }
 

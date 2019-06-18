@@ -7,7 +7,7 @@ import android.util.Log
 import android.widget.EditText
 import kotlinx.android.synthetic.main.login_view.*
 
-class Login: AppCompatActivity() {
+class LoginActivity: AppCompatActivity() {
     var username: String?=null
     var password: String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +24,7 @@ class Login: AppCompatActivity() {
 
             Log.d(username, password)
 
-            var i:Intent = Intent(this, MainActivity::class.java)
+            var i:Intent = Intent(this, HomeActivity::class.java)
             startActivity(i)
 
         }

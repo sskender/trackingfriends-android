@@ -8,19 +8,17 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.login_view.*
+import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.app_bar_home.*
 import android.content.Intent
-import kotlinx.android.synthetic.main.content_main.*
-import kotlin.Any
+import kotlinx.android.synthetic.main.content_home.*
 
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
 
         buttonMap.setOnClickListener { view ->
@@ -33,7 +31,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-            var i:Intent = Intent(this, Login::class.java)
+            var i:Intent = Intent(this, LoginActivity::class.java)
             startActivity(i)
         }
 
@@ -81,7 +79,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_share -> {
-                var i:Intent = Intent(this, Register::class.java)
+                var i:Intent = Intent(this, RegisterActivity::class.java)
                 startActivity(i)
             }
         }
