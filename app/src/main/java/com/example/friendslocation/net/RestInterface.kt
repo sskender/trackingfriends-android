@@ -16,16 +16,18 @@ interface RestInterface {
     fun updateUserProfile(user: User): UserPublicProfile?
 
 
-    fun getUserFriends()
+    fun searchUsersForFriends(search: String): List<UserPublicProfile>?
 
-    fun getUserFriendRequests()
+    fun getUserFriends(): List<UserPublicProfile>?
+
+    fun getUserFriendRequests(): List<UserPublicProfile>?
 
 
-    fun sendFriendRequest(userId: String, friendId: String): Void?
+    fun sendFriendRequest(userId: String, friendId: String): Unit?
 
-    fun acceptFriendRequest(userId: String, friendId: String): Void?
+    fun acceptFriendRequest(userId: String, friendId: String): Unit?
 
-    fun denyFriendRequest(userId: String, friendId: String): Void?
+    fun denyFriendRequest(userId: String, friendId: String): Unit?
 
 
     fun updateUserLocation(location: Location): Location?

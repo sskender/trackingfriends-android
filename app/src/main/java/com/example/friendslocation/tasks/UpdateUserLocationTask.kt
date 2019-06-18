@@ -11,9 +11,4 @@ class UpdateUserLocationTask : AsyncTask<Location, Unit, Unit>() {
         rest.updateUserLocation(params[0])
     }
 
-    override fun onPostExecute(result: Unit?) {
-        super.onPostExecute(result)
-        // TODO return what?
-    }
-
 }

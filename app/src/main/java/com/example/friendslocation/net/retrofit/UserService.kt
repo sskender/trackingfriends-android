@@ -38,6 +38,6 @@ interface UserService {
         @Path("userId") userId: String,
         @Query("friendId") friendId: String,
         @Query("action") action: String
-    ): Call<Void>
+    ): Call<Unit>
 
 }

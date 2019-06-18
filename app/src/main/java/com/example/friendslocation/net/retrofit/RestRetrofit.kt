@@ -49,24 +49,28 @@ class RestRetrofit : RestInterface {
         return locationService.friendLocation(userId, friendId).execute().body()
     }
 
-    override fun getUserFriends() {
+    override fun searchUsersForFriends(search: String): List<UserPublicProfile>? {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getUserFriendRequests() {
+    override fun getUserFriends(): List<UserPublicProfile>? {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun sendFriendRequest(userId: String, friendId: String): Void? {
+    override fun getUserFriendRequests(): List<UserPublicProfile>? {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun sendFriendRequest(userId: String, friendId: String): Unit? {
         return userService.sendFriendRequestAction(userId, friendId, AppConstants.FRIEND_SEND_REQUEST).execute().body()
     }
 
-    override fun acceptFriendRequest(userId: String, friendId: String): Void? {
+    override fun acceptFriendRequest(userId: String, friendId: String): Unit? {
         return userService.sendFriendRequestAction(userId, friendId, AppConstants.FRIEND_ACCEPT_REQUEST).execute()
             .body()
     }
 
-    override fun denyFriendRequest(userId: String, friendId: String): Void? {
+    override fun denyFriendRequest(userId: String, friendId: String): Unit? {
         return userService.sendFriendRequestAction(userId, friendId, AppConstants.FRIEND_DENY_REQUEST).execute().body()
     }
 
