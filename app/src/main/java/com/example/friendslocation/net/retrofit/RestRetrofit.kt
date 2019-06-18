@@ -9,12 +9,22 @@ import retrofit2.Retrofit
 
 class RestRetrofit : RestInterface {
 
+    /* server ip */
+    val SERVER_URL: String = "http://" + RestFactory.SERVER_IP + ":" + RestFactory.SERVER_PORT + "/api/v1/"
+
+
+    /* friend requests */
+    private val FRIEND_SEND_REQUEST: String = "request"
+    private val FRIEND_ACCEPT_REQUEST: String = "accept"
+    private val FRIEND_DENY_REQUEST: String = "deny"
+
+
+    /* services */
     private val userService: UserService
     private val locationService: LocationService
 
-    init {
-        val SERVER_URL = "http://" + RestFactory.SERVER_IP + ":" + RestFactory.SERVER_PORT + "/api/v1/"
 
+    init {
         val retrofit = Retrofit.Builder()
             .baseUrl(SERVER_URL)
             .build()
@@ -22,6 +32,7 @@ class RestRetrofit : RestInterface {
         this.userService = retrofit.create(UserService::class.java)
         this.locationService = retrofit.create(LocationService::class.java)
     }
+
 
     override fun registerUser(user: User): UserPublicProfile? {
         return userService.register(user).execute().body()
@@ -56,15 +67,15 @@ class RestRetrofit : RestInterface {
     }
 
     override fun sendFriendRequest(userId: String, friendId: String): Void? {
-        return userService.sendFriendRequestAction(userId, friendId, "request").execute().body()
+        return userService.sendFriendRequestAction(userId, friendId, FRIEND_SEND_REQUEST).execute().body()
     }
 
     override fun acceptFriendRequest(userId: String, friendId: String): Void? {
-        return userService.sendFriendRequestAction(userId, friendId, "accept").execute().body()
+        return userService.sendFriendRequestAction(userId, friendId, FRIEND_ACCEPT_REQUEST).execute().body()
     }
 
     override fun denyFriendRequest(userId: String, friendId: String): Void? {
-        return userService.sendFriendRequestAction(userId, friendId, "deny").execute().body()
+        return userService.sendFriendRequestAction(userId, friendId, FRIEND_DENY_REQUEST).execute().body()
     }
 
 }

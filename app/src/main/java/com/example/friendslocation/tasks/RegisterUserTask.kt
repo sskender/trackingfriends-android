@@ -12,4 +12,9 @@ class RegisterUserTask : AsyncTask<User, Unit, UserPublicProfile?>() {
         return rest.registerUser(params[0])
     }
 
+    override fun onPostExecute(result: UserPublicProfile?) {
+        super.onPostExecute(result)
+        // TODO return userId
+    }
+
 }

@@ -11,4 +11,9 @@ class GetFriendLocationTask : AsyncTask<Pair<String, String>, Unit, Location>() 
         return rest.getFriendsLocation(params[0].first, params[0].second)
     }
 
+    override fun onPostExecute(result: Location?) {
+        super.onPostExecute(result)
+        // TODO return result
+    }
+
 }
