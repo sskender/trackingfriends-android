@@ -6,6 +6,7 @@ import com.example.friendslocation.entity.UserPublicProfile
 import com.example.friendslocation.net.RestFactory
 import com.example.friendslocation.net.RestInterface
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class RestRetrofit : RestInterface {
 
@@ -27,6 +28,7 @@ class RestRetrofit : RestInterface {
     init {
         val retrofit = Retrofit.Builder()
             .baseUrl(SERVER_URL)
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         this.userService = retrofit.create(UserService::class.java)
