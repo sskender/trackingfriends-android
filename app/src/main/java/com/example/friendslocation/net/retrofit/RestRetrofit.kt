@@ -3,31 +3,20 @@ package com.example.friendslocation.net.retrofit
 import com.example.friendslocation.entity.Location
 import com.example.friendslocation.entity.User
 import com.example.friendslocation.entity.UserPublicProfile
-import com.example.friendslocation.net.RestFactory
+import com.example.friendslocation.misc.AppConstants
 import com.example.friendslocation.net.RestInterface
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class RestRetrofit : RestInterface {
 
-    /* server ip */
-    val SERVER_URL: String = "http://" + RestFactory.SERVER_IP + ":" + RestFactory.SERVER_PORT + "/api/v1/"
-
-
-    /* friend requests */
-    private val FRIEND_SEND_REQUEST: String = "request"
-    private val FRIEND_ACCEPT_REQUEST: String = "accept"
-    private val FRIEND_DENY_REQUEST: String = "deny"
-
-
     /* services */
     private val userService: UserService
     private val locationService: LocationService
 
-
     init {
         val retrofit = Retrofit.Builder()
-            .baseUrl(SERVER_URL)
+            .baseUrl(AppConstants.SERVER_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -69,15 +58,16 @@ class RestRetrofit : RestInterface {
     }
 
     override fun sendFriendRequest(userId: String, friendId: String): Void? {
-        return userService.sendFriendRequestAction(userId, friendId, FRIEND_SEND_REQUEST).execute().body()
+        return userService.sendFriendRequestAction(userId, friendId, AppConstants.FRIEND_SEND_REQUEST).execute().body()
     }
 
     override fun acceptFriendRequest(userId: String, friendId: String): Void? {
-        return userService.sendFriendRequestAction(userId, friendId, FRIEND_ACCEPT_REQUEST).execute().body()
+        return userService.sendFriendRequestAction(userId, friendId, AppConstants.FRIEND_ACCEPT_REQUEST).execute()
+            .body()
     }
 
     override fun denyFriendRequest(userId: String, friendId: String): Void? {
-        return userService.sendFriendRequestAction(userId, friendId, FRIEND_DENY_REQUEST).execute().body()
+        return userService.sendFriendRequestAction(userId, friendId, AppConstants.FRIEND_DENY_REQUEST).execute().body()
     }
 
 }
