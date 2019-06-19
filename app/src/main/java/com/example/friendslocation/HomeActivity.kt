@@ -91,10 +91,12 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
 
         when (item.itemId) {
-            R.id.nav_camera -> {
-                // Handle the camera action
+            R.id.nav_findNewFriends -> {
+                // handle new friends search
+
             }
-            R.id.nav_gallery -> {
+            R.id.nav_myFriends -> {
+                // handle current friends browse
 
             }
             R.id.nav_share -> {
