@@ -5,7 +5,8 @@ import android.util.Log
 import com.example.friendslocation.entity.Location
 import com.example.friendslocation.net.RestFactory
 
-class UpdateUserLocationTask : AsyncTask<String, Unit, Unit>() {
+class UpdateUserLocationTask(private val userId: String) :
+    AsyncTask<Unit, Unit, Unit>() {
 
     private fun grabCurrentGPSLocation(): Location {
 
@@ -16,23 +17,22 @@ class UpdateUserLocationTask : AsyncTask<String, Unit, Unit>() {
 
         Log.d("MY_LOCATION", "lat: $latitude, lon: $longitude")
 
-        return Location("", latitude, longitude)
+        return Location(userId, latitude, longitude)
     }
 
-    override fun doInBackground(vararg params: String) {
+    override fun doInBackground(vararg params: Unit) {
         val rest = RestFactory.instance
 
         while (true) {
 
             // craft location
             val location: Location = grabCurrentGPSLocation()
-            location.userId = params[0]
 
             // send to server
             rest.updateUserLocation(location)
 
             // sleep some time
-            Thread.sleep(2000)
+            Thread.sleep(5000)
         }
 
     }

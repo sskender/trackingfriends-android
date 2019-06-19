@@ -36,7 +36,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // background thread to constantly update users location
         // TODO handle app close?
-        UpdateUserLocationTask().execute(userPublicProfile.userId)
+        UpdateUserLocationTask(userPublicProfile.userId).execute()
 
 
 
