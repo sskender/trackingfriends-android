@@ -32,14 +32,6 @@ interface UserService {
         @Body user: User
     ): Call<UserPublicProfile>
 
-    @POST("user/{userId}/friends")
-    @Headers("Accept-Encoding: application/json")
-    fun sendFriendRequestAction(
-        @Path("userId") userId: String,
-        @Query("friendId") friendId: String,
-        @Query("action") action: String
-    ): Call<Unit>
-
     @GET("user/{userId}/search")
     @Headers("Accept-Encoding: application/json")
     fun searchUsernames(
@@ -47,4 +39,24 @@ interface UserService {
         @Query("username") username: String
     ): Call<List<UserPublicProfile>>
 
+    @GET("user/{userId}/friends")
+    @Headers("Accept-Encoding: application/json")
+    fun getFriendsProfiles(
+
+    ): Call<List<UserPublicProfile>>
+
+    @GET("user/{userId}/friends/requests")
+    @Headers("Accept-Encoding: application/json")
+    fun getFriendRequestsProfiles(
+
+    ): Call<List<UserPublicProfile>>
+
+    @POST("user/{userId}/friends")
+    @Headers("Accept-Encoding: application/json")
+    fun sendFriendRequestAction(
+        @Path("userId") userId: String,
+        @Query("friendId") friendId: String,
+        @Query("action") action: String
+    ): Call<Unit>
+    
 }
