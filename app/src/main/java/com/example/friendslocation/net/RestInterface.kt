@@ -16,11 +16,11 @@ interface RestInterface {
     fun updateUserProfile(user: User): UserPublicProfile?
 
 
-    fun searchUsersForFriends(search: String): List<UserPublicProfile>?
+    fun searchUsersForFriends(userId: String, searchUsername: String): List<UserPublicProfile>?
 
-    fun getUserFriends(): List<UserPublicProfile>?
+    fun getUserFriends(userId: String): List<UserPublicProfile>?
 
-    fun getUserFriendRequests(): List<UserPublicProfile>?
+    fun getUserFriendRequests(userId: String): List<UserPublicProfile>?
 
 
     fun sendFriendRequest(userId: String, friendId: String): Unit?

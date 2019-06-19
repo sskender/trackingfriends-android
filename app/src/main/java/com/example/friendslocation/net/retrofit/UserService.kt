@@ -40,4 +40,11 @@ interface UserService {
         @Query("action") action: String
     ): Call<Unit>
 
+    @GET("user/{userId}/search")
+    @Headers("Accept-Encoding: application/json")
+    fun searchUsernames(
+        @Path("userId") userId: String,
+        @Query("username") username: String
+    ): Call<List<UserPublicProfile>>
+
 }

@@ -14,6 +14,7 @@ class RestRetrofit : RestInterface {
     private val userService: UserService
     private val locationService: LocationService
 
+
     init {
         val retrofit = Retrofit.Builder()
             .baseUrl(AppConstants.SERVER_URL)
@@ -49,15 +50,15 @@ class RestRetrofit : RestInterface {
         return locationService.friendLocation(userId, friendId).execute().body()
     }
 
-    override fun searchUsersForFriends(search: String): List<UserPublicProfile>? {
+    override fun searchUsersForFriends(userId: String, searchUsername: String): List<UserPublicProfile>? {
+        return userService.searchUsernames(userId, searchUsername).execute().body()
+    }
+
+    override fun getUserFriends(userId: String): List<UserPublicProfile>? {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getUserFriends(): List<UserPublicProfile>? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun getUserFriendRequests(): List<UserPublicProfile>? {
+    override fun getUserFriendRequests(userId: String): List<UserPublicProfile>? {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
