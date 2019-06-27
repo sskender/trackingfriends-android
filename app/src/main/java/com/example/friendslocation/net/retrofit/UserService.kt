@@ -42,13 +42,13 @@ interface UserService {
     @GET("user/{userId}/friends")
     @Headers("Accept-Encoding: application/json")
     fun getFriendsProfiles(
-
+        @Path("userId") userId: String
     ): Call<List<UserPublicProfile>>
 
     @GET("user/{userId}/friends/requests")
     @Headers("Accept-Encoding: application/json")
     fun getFriendRequestsProfiles(
-
+        @Path("userId") userId: String
     ): Call<List<UserPublicProfile>>
 
     @POST("user/{userId}/friends")
@@ -58,5 +58,5 @@ interface UserService {
         @Query("friendId") friendId: String,
         @Query("action") action: String
     ): Call<Unit>
-    
+
 }
