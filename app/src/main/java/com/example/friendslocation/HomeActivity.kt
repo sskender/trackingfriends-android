@@ -11,7 +11,6 @@ import android.view.Menu
 import android.view.MenuItem
 import com.example.friendslocation.entity.UserPublicProfile
 import com.example.friendslocation.misc.AppConstants
-import com.example.friendslocation.tasks.UpdateUserLocationTask
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.content_home.*
@@ -36,7 +35,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // background thread to constantly update users location
         // TODO handle app close?
-        UpdateUserLocationTask(userPublicProfile.userId).execute()
+//        UpdateUserLocationTask(userPublicProfile.userId).execute()
 
 
 
@@ -92,8 +91,13 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         when (item.itemId) {
             R.id.nav_findNewFriends -> {
-                // handle new friends search
+                // handle users search activity
 
+                val searchUsersActivityWithExtra = Intent(this, SearchUsersActivity::class.java)
+
+                searchUsersActivityWithExtra.putExtra(AppConstants.USER_PROFILE_INTENT_EXTRA, userPublicProfile)
+
+                startActivity(searchUsersActivityWithExtra)
             }
             R.id.nav_myFriends -> {
                 // handle current friends browse
