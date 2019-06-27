@@ -36,6 +36,8 @@ class SearchUsersAdapter(private val userId: String) :
         p0.addFriendImageButton?.setOnClickListener {
             // call server
             SendFriendRequestTask(userId).execute(currentSearchUserPublicProfile.userId)
+
+            // TODO change icon when friend request send
         }
 
     }
