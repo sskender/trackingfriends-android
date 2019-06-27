@@ -5,7 +5,7 @@ class AppConstants {
     companion object {
 
         // this ip is only valid for emulator
-        private const val SERVER_IP = "10.0.2.2"
+        private const val SERVER_IP = "10.129.136.155"
         private const val SERVER_PORT = "8080"
 
         // server base url
