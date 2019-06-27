@@ -99,8 +99,17 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                 startActivity(searchUsersActivityWithExtra)
             }
+            R.id.nav_friendRequests -> {
+                // handle pending friend requests
+
+                val friendRequestsActivityWithExtra = Intent(this, FriendRequestsActivity::class.java)
+
+                friendRequestsActivityWithExtra.putExtra(AppConstants.USER_PROFILE_INTENT_EXTRA, userPublicProfile)
+
+                startActivity(friendRequestsActivityWithExtra)
+            }
             R.id.nav_myFriends -> {
-                // handle current friends browse
+                // handle list of user's friends
 
             }
             R.id.nav_share -> {
@@ -112,4 +121,5 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+
 }

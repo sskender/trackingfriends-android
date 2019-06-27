@@ -59,7 +59,7 @@ class RestRetrofit : RestInterface {
     }
 
     override fun getUserFriendRequests(userId: String): List<UserPublicProfile>? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return userService.getFriendRequestsProfiles(userId).execute().body()
     }
 
     override fun sendFriendRequest(userId: String, friendId: String): Unit? {

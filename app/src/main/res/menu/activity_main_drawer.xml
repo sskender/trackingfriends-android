@@ -9,6 +9,10 @@
                 android:icon="@drawable/ic_menu_camera"
                 android:title="@string/find_new_friends"/>
         <item
+                android:id="@+id/nav_friendRequests"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="Friend requests"/>
+        <item
                 android:id="@+id/nav_myFriends"
                 android:icon="@drawable/ic_menu_gallery"
                 android:title="@string/my_friends"/>
