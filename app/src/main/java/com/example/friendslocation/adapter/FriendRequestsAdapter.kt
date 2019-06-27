@@ -10,6 +10,8 @@ import android.widget.TextView
 import com.example.friendslocation.R
 import com.example.friendslocation.dao.UserPublicProfileList
 import com.example.friendslocation.entity.UserPublicProfile
+import com.example.friendslocation.tasks.AcceptFriendRequestTask
+import com.example.friendslocation.tasks.DenyFriendRequestTask
 
 class FriendRequestsAdapter(private val userPublicProfile: UserPublicProfile) :
     RecyclerView.Adapter<FriendRequestsAdapter.FriendRequestAdapterHolder>() {
@@ -32,12 +34,14 @@ class FriendRequestsAdapter(private val userPublicProfile: UserPublicProfile) :
         // grab username from object
         p0.usernameText?.text = currentFriendRequestPublicProfile.username
 
+        // accept friend request
         p0.acceptFriendRequestButton?.setOnClickListener {
-            // TODO call accept
+            AcceptFriendRequestTask(userPublicProfile.userId).execute(currentFriendRequestPublicProfile.userId)
         }
 
+        // deny friend request
         p0.denyFriendRequestButton?.setOnClickListener {
-            // TODO call deny
+            DenyFriendRequestTask(userPublicProfile.userId).execute(currentFriendRequestPublicProfile.userId)
         }
 
         p0.itemView.setOnClickListener {
