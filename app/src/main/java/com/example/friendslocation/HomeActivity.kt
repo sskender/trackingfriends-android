@@ -104,7 +104,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(searchUsersActivityWithExtra)
             }
             R.id.nav_friendRequests -> {
-                // handle pending friend requests
+                // handle pending friend requests activity
 
                 val friendRequestsActivityWithExtra = Intent(this, FriendRequestsActivity::class.java)
 
@@ -113,8 +113,13 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(friendRequestsActivityWithExtra)
             }
             R.id.nav_myFriends -> {
-                // handle list of user's friends
+                // handle user friends activity
 
+                val friendsActivityWithExtra = Intent(this, FriendsActivity::class.java)
+
+                friendsActivityWithExtra.putExtra(AppConstants.USER_PROFILE_INTENT_EXTRA, userPublicProfile)
+
+                startActivity(friendsActivityWithExtra)
             }
             R.id.nav_share -> {
                 var i:Intent = Intent(this, RegisterActivity::class.java)
