@@ -12,21 +12,21 @@ import com.example.friendslocation.entity.UserPublicProfile
 import com.example.friendslocation.tasks.SendFriendRequestTask
 
 class SearchUsersAdapter(private val userPublicProfile: UserPublicProfile) :
-    RecyclerView.Adapter<SearchUsersAdapter.SearchUsersAdapterHolder>() {
+    RecyclerView.Adapter<SearchUsersAdapter.SearchUserAdapterHolder>() {
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): SearchUsersAdapterHolder {
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): SearchUserAdapterHolder {
         val context = p0.context
         val inflater = LayoutInflater.from(context)
-        val userListElement = inflater.inflate(R.layout.search_user_item_in_list, p0, false)
+        val userListElement = inflater.inflate(R.layout.search_username_item_in_list, p0, false)
 
-        return SearchUsersAdapterHolder(userListElement)
+        return SearchUserAdapterHolder(userListElement)
     }
 
     override fun getItemCount(): Int {
         return UserPublicProfileList.list.size
     }
 
-    override fun onBindViewHolder(p0: SearchUsersAdapterHolder, p1: Int) {
+    override fun onBindViewHolder(p0: SearchUserAdapterHolder, p1: Int) {
         val currentSearchUserPublicProfile: UserPublicProfile = UserPublicProfileList.list[p1]
 
         // grab username from object
@@ -45,7 +45,7 @@ class SearchUsersAdapter(private val userPublicProfile: UserPublicProfile) :
     /**
      * Holder class
      */
-    class SearchUsersAdapterHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class SearchUserAdapterHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var usernameText: TextView? = null
         var addFriendImageButton: ImageView? = null

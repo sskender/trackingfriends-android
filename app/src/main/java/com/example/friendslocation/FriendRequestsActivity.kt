@@ -33,10 +33,9 @@ class FriendRequestsActivity : AppCompatActivity() {
         friendRequestsAdapter = FriendRequestsAdapter(userPublicProfile)
         friendRequestsRecyclerView.adapter = friendRequestsAdapter
 
-        // load friends
-        LoadFriendRequestsTask(userPublicProfile.userId, friendRequestsAdapter).execute()
 
-        // TODO save this to local database
+        // load friend requests
+        LoadFriendRequestsTask(userPublicProfile.userId, friendRequestsAdapter).execute()
     }
 
 }

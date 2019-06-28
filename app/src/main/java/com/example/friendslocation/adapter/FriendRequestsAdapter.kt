@@ -1,7 +1,6 @@
 package com.example.friendslocation.adapter
 
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,12 +43,6 @@ class FriendRequestsAdapter(private val userPublicProfile: UserPublicProfile) :
             DenyFriendRequestTask(userPublicProfile.userId).execute(currentFriendRequestPublicProfile.userId)
         }
 
-        // open map on tap
-        p0.itemView.setOnClickListener {
-            // TODO open map when user tapped
-            Log.d("FRIEND", "opening location for friend with id ${currentFriendRequestPublicProfile.userId}")
-        }
-
     }
 
 
@@ -63,7 +56,7 @@ class FriendRequestsAdapter(private val userPublicProfile: UserPublicProfile) :
         var denyFriendRequestButton: Button? = null
 
         init {
-            usernameText = itemView.findViewById(R.id.friendUsernameTextView)
+            usernameText = itemView.findViewById(R.id.friendRequestUsernameTextView)
             acceptFriendRequestButton = itemView.findViewById(R.id.acceptFriendButton)
             denyFriendRequestButton = itemView.findViewById(R.id.denyFriendButton)
         }
