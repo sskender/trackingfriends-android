@@ -11,7 +11,7 @@ import com.example.friendslocation.dao.UserPublicProfileList
 import com.example.friendslocation.entity.UserPublicProfile
 import com.example.friendslocation.tasks.SendFriendRequestTask
 
-class SearchUsersAdapter(private val userId: String) :
+class SearchUsersAdapter(private val userPublicProfile: UserPublicProfile) :
     RecyclerView.Adapter<SearchUsersAdapter.SearchUsersAdapterHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): SearchUsersAdapterHolder {
@@ -32,10 +32,9 @@ class SearchUsersAdapter(private val userId: String) :
         // grab username from object
         p0.usernameText?.text = currentSearchUserPublicProfile.username
 
-        // .itemView.setOnClickListener
+        // send friend request
         p0.addFriendImageButton?.setOnClickListener {
-            // call server
-            SendFriendRequestTask(userId).execute(currentSearchUserPublicProfile.userId)
+            SendFriendRequestTask(userPublicProfile.userId).execute(currentSearchUserPublicProfile.userId)
 
             // TODO change icon when friend request send
         }

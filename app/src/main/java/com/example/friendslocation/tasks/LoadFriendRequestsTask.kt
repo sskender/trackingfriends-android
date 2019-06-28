@@ -6,7 +6,7 @@ import com.example.friendslocation.dao.UserPublicProfileList
 import com.example.friendslocation.entity.UserPublicProfile
 import com.example.friendslocation.net.RestFactory
 
-class GetFriendRequestTask(
+class LoadFriendRequestsTask(
     private val userId: String,
     private val friendRequestsAdapter: FriendRequestsAdapter
 ) :

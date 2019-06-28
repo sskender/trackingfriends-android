@@ -44,6 +44,7 @@ class FriendRequestsAdapter(private val userPublicProfile: UserPublicProfile) :
             DenyFriendRequestTask(userPublicProfile.userId).execute(currentFriendRequestPublicProfile.userId)
         }
 
+        // open map on tap
         p0.itemView.setOnClickListener {
             // TODO open map when user tapped
             Log.d("FRIEND", "opening location for friend with id ${currentFriendRequestPublicProfile.userId}")

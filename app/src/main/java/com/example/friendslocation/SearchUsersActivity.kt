@@ -30,11 +30,11 @@ class SearchUsersActivity : AppCompatActivity() {
 
         // set adapter
         searchUsersRecyclerView.layoutManager = LinearLayoutManager(this)
-        searchUsersAdapter = SearchUsersAdapter(userPublicProfile.userId)
+        searchUsersAdapter = SearchUsersAdapter(userPublicProfile)
         searchUsersRecyclerView.adapter = searchUsersAdapter
 
 
-        // search button
+        // trigger search button
         searchUsersButton.setOnClickListener {
             val friendId: String = searchUsersEditText.text.toString()
 
