@@ -1,12 +1,14 @@
 package com.example.friendslocation
 
+import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.example.friendslocation.adapter.FriendRequestsAdapter
 import com.example.friendslocation.config.AppConstants
+import com.example.friendslocation.dao.UserDataDao
 import com.example.friendslocation.entity.UserPublicProfile
-import com.example.friendslocation.tasks.LoadFriendRequestsTask
+import com.example.friendslocation.net.RestFactory
 import kotlinx.android.synthetic.main.activity_friend_requests.*
 
 class FriendRequestsActivity : AppCompatActivity() {
@@ -35,7 +37,34 @@ class FriendRequestsActivity : AppCompatActivity() {
 
 
         // load friend requests
-        LoadFriendRequestsTask(userPublicProfile.userId, friendRequestsAdapter).execute()
+        LoadFriendRequestsTask().execute()
+    }
+
+
+    /**
+     * Load friends task
+     */
+    inner class LoadFriendRequestsTask :
+        AsyncTask<Unit, Unit, List<UserPublicProfile>?>() {
+
+        override fun onPostExecute(result: List<UserPublicProfile>?) {
+
+            if (result != null) {
+                UserDataDao.userPublicProfilesList = result as MutableList<UserPublicProfile>
+            }
+
+            // update adapter
+            friendRequestsAdapter.notifyDataSetChanged()
+
+            super.onPostExecute(result)
+        }
+
+        override fun doInBackground(vararg p0: Unit?): List<UserPublicProfile>? {
+            val rest = RestFactory.instance
+
+            return rest.getUserFriendRequests(userPublicProfile.userId)
+        }
+
     }
 
 }

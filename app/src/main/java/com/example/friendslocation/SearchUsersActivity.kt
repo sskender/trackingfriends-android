@@ -1,12 +1,14 @@
 package com.example.friendslocation
 
+import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.example.friendslocation.adapter.SearchUsersAdapter
 import com.example.friendslocation.config.AppConstants
+import com.example.friendslocation.dao.UserDataDao
 import com.example.friendslocation.entity.UserPublicProfile
-import com.example.friendslocation.tasks.LoadSearchUsersTask
+import com.example.friendslocation.net.RestFactory
 import kotlinx.android.synthetic.main.activity_seach_users.*
 
 class SearchUsersActivity : AppCompatActivity() {
@@ -38,7 +40,34 @@ class SearchUsersActivity : AppCompatActivity() {
         searchUsersButton.setOnClickListener {
             val friendId: String = searchUsersEditText.text.toString()
 
-            LoadSearchUsersTask(userPublicProfile.userId, searchUsersAdapter).execute(friendId)
+            LoadSearchUsersTask().execute(friendId)
+        }
+
+    }
+
+
+    /**
+     * Search users task
+     */
+    inner class LoadSearchUsersTask :
+        AsyncTask<String, Unit, List<UserPublicProfile>?>() {
+
+        override fun doInBackground(vararg p0: String): List<UserPublicProfile>? {
+            val rest = RestFactory.instance
+
+            return rest.searchUsersForFriends(userPublicProfile.userId, p0[0])
+        }
+
+        override fun onPostExecute(result: List<UserPublicProfile>?) {
+
+            if (result != null) {
+                UserDataDao.userPublicProfilesList = result as MutableList<UserPublicProfile>
+            }
+
+            // update adapter
+            searchUsersAdapter.notifyDataSetChanged()
+
+            super.onPostExecute(result)
         }
 
     }

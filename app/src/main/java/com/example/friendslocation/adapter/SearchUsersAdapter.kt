@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.friendslocation.R
-import com.example.friendslocation.dao.UserListDao
+import com.example.friendslocation.dao.UserDataDao
 import com.example.friendslocation.entity.UserPublicProfile
 import com.example.friendslocation.net.RestFactory
 
@@ -25,11 +25,11 @@ class SearchUsersAdapter(private val userPublicProfile: UserPublicProfile) :
     }
 
     override fun getItemCount(): Int {
-        return UserListDao.publicProfileList.size
+        return UserDataDao.userPublicProfilesList.size
     }
 
     override fun onBindViewHolder(p0: SearchUserAdapterHolder, p1: Int) {
-        val currentSearchUserPublicProfile: UserPublicProfile = UserListDao.publicProfileList[p1]
+        val currentSearchUserPublicProfile: UserPublicProfile = UserDataDao.userPublicProfilesList[p1]
 
         // grab username from object
         p0.usernameText?.text = currentSearchUserPublicProfile.username

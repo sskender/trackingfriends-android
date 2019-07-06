@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.example.friendslocation.R
-import com.example.friendslocation.dao.UserListDao
+import com.example.friendslocation.dao.UserDataDao
 import com.example.friendslocation.entity.UserPublicProfile
 import com.example.friendslocation.net.RestFactory
 
@@ -25,25 +25,25 @@ class FriendRequestsAdapter(private val userPublicProfile: UserPublicProfile) :
     }
 
     override fun getItemCount(): Int {
-        return UserListDao.publicProfileList.size
+        return UserDataDao.userPublicProfilesList.size
     }
 
     override fun onBindViewHolder(p0: FriendRequestAdapterHolder, p1: Int) {
-        val currentFriendRequestPublicProfile: UserPublicProfile = UserListDao.publicProfileList[p1]
+        val currentFriendRequestPublicProfile: UserPublicProfile = UserDataDao.userPublicProfilesList[p1]
 
         // grab username from object
         p0.usernameText?.text = currentFriendRequestPublicProfile.username
 
         // accept friend request
         p0.acceptFriendRequestButton?.setOnClickListener {
-            AcceptFriendRequestTask(userPublicProfile.userId).execute(currentFriendRequestPublicProfile)
+            AcceptFriendRequestTask().execute(currentFriendRequestPublicProfile)
 
             Toast.makeText(p0.itemView.context, "Friend accepted!", Toast.LENGTH_SHORT).show()
         }
 
         // deny friend request
         p0.denyFriendRequestButton?.setOnClickListener {
-            DenyFriendRequestTask(userPublicProfile.userId).execute(currentFriendRequestPublicProfile)
+            DenyFriendRequestTask().execute(currentFriendRequestPublicProfile)
 
             Toast.makeText(p0.itemView.context, "Friend denied!", Toast.LENGTH_SHORT).show()
         }
@@ -72,15 +72,15 @@ class FriendRequestsAdapter(private val userPublicProfile: UserPublicProfile) :
     /**
      * Accept friendship task
      */
-    inner class AcceptFriendRequestTask(private val userId: String) : AsyncTask<UserPublicProfile, Unit, Unit?>() {
+    inner class AcceptFriendRequestTask : AsyncTask<UserPublicProfile, Unit, Unit?>() {
 
         override fun doInBackground(vararg p0: UserPublicProfile): Unit? {
             val rest = RestFactory.instance
             val friendId = p0[0].userId
 
-            UserListDao.publicProfileList.remove(p0[0])
+            UserDataDao.userPublicProfilesList.remove(p0[0])
 
-            return rest.acceptFriendRequest(userId, friendId)
+            return rest.acceptFriendRequest(userPublicProfile.userId, friendId)
         }
 
         override fun onPostExecute(result: Unit?) {
@@ -95,15 +95,15 @@ class FriendRequestsAdapter(private val userPublicProfile: UserPublicProfile) :
     /**
      * Deny friendship task
      */
-    inner class DenyFriendRequestTask(private val userId: String) : AsyncTask<UserPublicProfile, Unit, Unit?>() {
+    inner class DenyFriendRequestTask : AsyncTask<UserPublicProfile, Unit, Unit?>() {
 
         override fun doInBackground(vararg p0: UserPublicProfile): Unit? {
             val rest = RestFactory.instance
             val friendId = p0[0].userId
 
-            UserListDao.publicProfileList.remove(p0[0])
+            UserDataDao.userPublicProfilesList.remove(p0[0])
 
-            return rest.denyFriendRequest(userId, friendId)
+            return rest.denyFriendRequest(userPublicProfile.userId, friendId)
         }
 
         override fun onPostExecute(result: Unit?) {

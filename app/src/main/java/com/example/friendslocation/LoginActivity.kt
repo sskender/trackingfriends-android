@@ -1,14 +1,15 @@
 package com.example.friendslocation
 
 import android.content.Intent
+import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.example.friendslocation.config.AppConstants
 import com.example.friendslocation.entity.User
-import com.example.friendslocation.tasks.LoginUserTask
+import com.example.friendslocation.entity.UserPublicProfile
+import com.example.friendslocation.net.RestFactory
 import kotlinx.android.synthetic.main.login_view.*
-import java.lang.ref.WeakReference
 
 class LoginActivity: AppCompatActivity() {
 
@@ -29,7 +30,7 @@ class LoginActivity: AppCompatActivity() {
             } else {
                 val user: User = User("", "", email, password)
 
-                LoginUserTask(WeakReference(this)).execute(user)
+                LoginUserTask().execute(user)
             }
         }
 
@@ -40,6 +41,39 @@ class LoginActivity: AppCompatActivity() {
             val registerActivityIntent = Intent(this, RegisterActivity::class.java)
 
             startActivity(registerActivityIntent)
+        }
+
+    }
+
+
+    /**
+     * Login user task
+     */
+    inner class LoginUserTask :
+        AsyncTask<User, Unit, UserPublicProfile?>() {
+
+        override fun doInBackground(vararg params: User): UserPublicProfile? {
+            val rest = RestFactory.instance
+
+            return rest.loginUser(params[0])
+        }
+
+        override fun onPostExecute(result: UserPublicProfile?) {
+
+            if (result == null) {
+                Toast.makeText(this@LoginActivity, "Invalid credentials!", Toast.LENGTH_LONG).show()
+
+            } else {
+                // start home activity
+                // pass user public profile retrieved from server
+
+                val homeActivityWithExtra = Intent(this@LoginActivity, HomeActivity::class.java)
+                homeActivityWithExtra.putExtra(AppConstants.USER_PROFILE_INTENT_EXTRA, result)
+
+                startActivity(homeActivityWithExtra)
+
+            }
+
         }
 
     }

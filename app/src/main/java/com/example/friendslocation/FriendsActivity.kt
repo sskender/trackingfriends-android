@@ -1,12 +1,14 @@
 package com.example.friendslocation
 
+import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.example.friendslocation.adapter.FriendsAdapter
 import com.example.friendslocation.config.AppConstants
+import com.example.friendslocation.dao.UserDataDao
 import com.example.friendslocation.entity.UserPublicProfile
-import com.example.friendslocation.tasks.LoadFriendsTask
+import com.example.friendslocation.net.RestFactory
 import kotlinx.android.synthetic.main.activity_friends.*
 
 class FriendsActivity : AppCompatActivity() {
@@ -35,9 +37,36 @@ class FriendsActivity : AppCompatActivity() {
 
 
         // load friends
-        LoadFriendsTask(userPublicProfile.userId, friendsAdapter).execute()
+        LoadFriendsTask().execute()
 
         // TODO save this to local database
+    }
+
+
+    /**
+     * Load friends task
+     */
+    inner class LoadFriendsTask :
+        AsyncTask<Unit, Unit, List<UserPublicProfile>?>() {
+
+        override fun doInBackground(vararg p0: Unit?): List<UserPublicProfile>? {
+            val rest = RestFactory.instance
+
+            return rest.getUserFriends(userPublicProfile.userId)
+        }
+
+        override fun onPostExecute(result: List<UserPublicProfile>?) {
+
+            if (result != null) {
+                UserDataDao.userPublicProfilesList = result as MutableList<UserPublicProfile>
+            }
+
+            // update adapter
+            friendsAdapter.notifyDataSetChanged()
+
+            super.onPostExecute(result)
+        }
+
     }
 
 }

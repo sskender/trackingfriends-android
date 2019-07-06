@@ -2,7 +2,6 @@ package com.example.friendslocation.adapter
 
 import android.os.AsyncTask
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,8 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import com.example.friendslocation.R
-import com.example.friendslocation.dao.UserListDao
+import com.example.friendslocation.dao.UserDataDao
+import com.example.friendslocation.entity.Location
 import com.example.friendslocation.entity.UserPublicProfile
 import com.example.friendslocation.net.RestFactory
 
@@ -26,24 +26,25 @@ class FriendsAdapter(private val userPublicProfile: UserPublicProfile) :
     }
 
     override fun getItemCount(): Int {
-        return UserListDao.publicProfileList.size
+        return UserDataDao.userPublicProfilesList.size
     }
 
     override fun onBindViewHolder(p0: FriendAdapterHolder, p1: Int) {
-        val currentFriendRequestPublicProfile: UserPublicProfile = UserListDao.publicProfileList[p1]
+        val currentFriendRequestPublicProfile: UserPublicProfile = UserDataDao.userPublicProfilesList[p1]
 
         // grab username from object
         p0.usernameText?.text = currentFriendRequestPublicProfile.username
 
         // open map on tap
         p0.itemView.setOnClickListener {
-            // TODO open map when user tapped
-            Log.d("FRIEND", "opening location for friend with id ${currentFriendRequestPublicProfile.userId}")
+            LoadFriendLocationTask().execute(currentFriendRequestPublicProfile)
+
+            Toast.makeText(p0.itemView.context, "Friend visible on map!", Toast.LENGTH_LONG).show()
         }
 
         // delete friend button
         p0.deleteButton?.setOnClickListener {
-            DeleteFriendTask(userPublicProfile.userId).execute(currentFriendRequestPublicProfile)
+            DeleteFriendTask().execute(currentFriendRequestPublicProfile)
 
             Toast.makeText(p0.itemView.context, "Unfriended!", Toast.LENGTH_SHORT).show()
         }
@@ -68,17 +69,40 @@ class FriendsAdapter(private val userPublicProfile: UserPublicProfile) :
 
 
     /**
+     * Load friend's GPS location task
+     */
+    inner class LoadFriendLocationTask :
+        AsyncTask<UserPublicProfile, Unit, Location?>() {
+
+        override fun doInBackground(vararg p0: UserPublicProfile): Location? {
+            val rest = RestFactory.instance
+
+            return rest.getFriendsLocation(userPublicProfile.userId, p0[0].userId)
+        }
+
+        override fun onPostExecute(result: Location?) {
+            if (result != null) {
+                UserDataDao.friendLocationsList.add(result)
+            }
+
+            super.onPostExecute(result)
+        }
+
+    }
+
+
+    /**
      * Delete friend task
      */
-    inner class DeleteFriendTask(private val userId: String) : AsyncTask<UserPublicProfile, Unit, Unit?>() {
+    inner class DeleteFriendTask : AsyncTask<UserPublicProfile, Unit, Unit?>() {
 
         override fun doInBackground(vararg p0: UserPublicProfile): Unit? {
             val rest = RestFactory.instance
             val friendId: String = p0[0].userId
 
-            UserListDao.publicProfileList.remove(p0[0])
+            UserDataDao.userPublicProfilesList.remove(p0[0])
 
-            return rest.deleteFriend(userId, friendId)
+            return rest.deleteFriend(userPublicProfile.userId, friendId)
         }
 
         override fun onPostExecute(result: Unit?) {

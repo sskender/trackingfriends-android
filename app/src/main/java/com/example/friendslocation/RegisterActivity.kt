@@ -1,14 +1,16 @@
 package com.example.friendslocation
 
+import android.content.Intent
+import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.EditText
 import android.widget.Toast
 import com.example.friendslocation.config.AppConstants
 import com.example.friendslocation.entity.User
-import com.example.friendslocation.tasks.RegisterUserTask
+import com.example.friendslocation.entity.UserPublicProfile
+import com.example.friendslocation.net.RestFactory
 import kotlinx.android.synthetic.main.register_view.*
-import java.lang.ref.WeakReference
 
 class RegisterActivity: AppCompatActivity() {
 
@@ -34,11 +36,43 @@ class RegisterActivity: AppCompatActivity() {
             else{
                 val user: User = User("", username, email, password1)
 
-                RegisterUserTask(WeakReference(this)).execute(user)
+                RegisterUserTask().execute(user)
             }
 
         }
 
+
+    }
+
+
+    /**
+     * Register user task
+     */
+    inner class RegisterUserTask :
+        AsyncTask<User, Unit, UserPublicProfile?>() {
+
+        override fun doInBackground(vararg params: User): UserPublicProfile? {
+            val rest = RestFactory.instance
+
+            return rest.registerUser(params[0])
+        }
+
+        override fun onPostExecute(result: UserPublicProfile?) {
+
+            if (result == null) {
+                Toast.makeText(this@RegisterActivity, "Email already taken!", Toast.LENGTH_LONG).show()
+            } else {
+                // start home activity
+                // pass user public profile retrieved from server
+
+                val homeActivityWithExtra = Intent(this@RegisterActivity, HomeActivity::class.java)
+                homeActivityWithExtra.putExtra(AppConstants.USER_PROFILE_INTENT_EXTRA, result)
+
+                startActivity(homeActivityWithExtra)
+
+            }
+
+        }
 
     }
 

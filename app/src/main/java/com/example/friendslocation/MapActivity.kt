@@ -2,7 +2,8 @@ package com.example.friendslocation
 
 import android.os.Bundle
 import android.support.v4.app.FragmentActivity
-import android.util.Log
+import com.example.friendslocation.dao.UserDataDao
+import com.example.friendslocation.entity.Location
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -15,7 +16,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 class MapActivity : FragmentActivity(), OnMapReadyCallback {
 
     lateinit var map: GoogleMap
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,37 +31,27 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
 
-        var maracana: LatLng = LatLng(45.799338, 15.981387)
+        // add markers to map for all locations saved in dao
 
-        map.addMarker(
-            MarkerOptions().position(maracana).title("MACARANAA").icon(
-                BitmapDescriptorFactory.defaultMarker(
-                    BitmapDescriptorFactory.HUE_RED
-                )
+        for (friendLocation: Location in UserDataDao.friendLocationsList) {
+
+            var friendMarker: LatLng = LatLng(friendLocation.latitude, friendLocation.longitude)
+
+            map.addMarker(
+                MarkerOptions()
+                    .position(friendMarker)
+                    .title("Friend " + friendLocation.userId)
+                    .icon(
+                        BitmapDescriptorFactory.defaultMarker(
+                            BitmapDescriptorFactory.HUE_MAGENTA
+                        )
+                    )
             )
-        )
-        map.moveCamera(CameraUpdateFactory.newLatLng(maracana))
-        Log.d("sss", "ddd")
 
+            map.moveCamera(CameraUpdateFactory.newLatLng(friendMarker))
 
-        maracana = LatLng(40.799338, 15.981387)
+        }
 
-        map.addMarker(
-            MarkerOptions().position(maracana).title("MACARANAA").icon(
-                BitmapDescriptorFactory.defaultMarker(
-                    BitmapDescriptorFactory.HUE_AZURE
-                )
-            )
-        )
-        map.moveCamera(CameraUpdateFactory.newLatLng(maracana))
-        Log.d("sss", "ddd")
-
-        /*
-        googleMap.setOnMapLoadedCallback {
-            var maracana: LatLng=LatLng(45.799338, 15.981387)
-            map.addMarker(MarkerOptions().position(maracana).title("MACARANAA").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
-            map.moveCamera(CameraUpdateFactory.newLatLng(maracana))
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(maracana as LatLngBounds, 15))
-        }*/
     }
+
 }
