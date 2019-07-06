@@ -9,8 +9,8 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.example.friendslocation.config.AppConstants
 import com.example.friendslocation.entity.UserPublicProfile
-import com.example.friendslocation.misc.AppConstants
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.content_home.*
@@ -33,14 +33,10 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // assign user profile
         userPublicProfile = intent.extras?.get(AppConstants.USER_PROFILE_INTENT_EXTRA) as UserPublicProfile
 
-        // background thread to constantly update users location
-        // TODO handle app close?
-//        UpdateUserLocationTask(userPublicProfile.userId).execute()
-
 
 
         buttonMap.setOnClickListener { view ->
-            var i:Intent = Intent(this, Map::class.java)
+            var i: Intent = Intent(this, MapActivity::class.java)
             startActivity(i)
         }
 

@@ -2,7 +2,7 @@ package com.example.friendslocation.tasks
 
 import android.os.AsyncTask
 import com.example.friendslocation.adapter.FriendsAdapter
-import com.example.friendslocation.dao.UserPublicProfileList
+import com.example.friendslocation.dao.UserListDao
 import com.example.friendslocation.entity.UserPublicProfile
 import com.example.friendslocation.net.RestFactory
 
@@ -21,7 +21,7 @@ class LoadFriendsTask(
     override fun onPostExecute(result: List<UserPublicProfile>?) {
 
         if (result != null) {
-            UserPublicProfileList.list = result as MutableList<UserPublicProfile>
+            UserListDao.publicProfileList = result as MutableList<UserPublicProfile>
         }
 
         // update adapter

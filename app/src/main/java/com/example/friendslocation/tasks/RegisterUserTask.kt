@@ -6,9 +6,9 @@ import android.content.Intent
 import android.os.AsyncTask
 import android.widget.Toast
 import com.example.friendslocation.HomeActivity
+import com.example.friendslocation.config.AppConstants
 import com.example.friendslocation.entity.User
 import com.example.friendslocation.entity.UserPublicProfile
-import com.example.friendslocation.misc.AppConstants
 import com.example.friendslocation.net.RestFactory
 import java.lang.ref.WeakReference
 

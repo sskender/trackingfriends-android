@@ -1,9 +1,9 @@
 package com.example.friendslocation.net.retrofit
 
+import com.example.friendslocation.config.AppConstants
 import com.example.friendslocation.entity.Location
 import com.example.friendslocation.entity.User
 import com.example.friendslocation.entity.UserPublicProfile
-import com.example.friendslocation.misc.AppConstants
 import com.example.friendslocation.net.RestInterface
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

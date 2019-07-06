@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.example.friendslocation.adapter.SearchUsersAdapter
+import com.example.friendslocation.config.AppConstants
 import com.example.friendslocation.entity.UserPublicProfile
-import com.example.friendslocation.misc.AppConstants
-import com.example.friendslocation.tasks.SearchUsersTask
+import com.example.friendslocation.tasks.LoadSearchUsersTask
 import kotlinx.android.synthetic.main.activity_seach_users.*
 
 class SearchUsersActivity : AppCompatActivity() {
@@ -38,7 +38,7 @@ class SearchUsersActivity : AppCompatActivity() {
         searchUsersButton.setOnClickListener {
             val friendId: String = searchUsersEditText.text.toString()
 
-            SearchUsersTask(userPublicProfile.userId, searchUsersAdapter).execute(friendId)
+            LoadSearchUsersTask(userPublicProfile.userId, searchUsersAdapter).execute(friendId)
         }
 
     }

@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.example.friendslocation.adapter.FriendRequestsAdapter
+import com.example.friendslocation.config.AppConstants
 import com.example.friendslocation.entity.UserPublicProfile
-import com.example.friendslocation.misc.AppConstants
 import com.example.friendslocation.tasks.LoadFriendRequestsTask
 import kotlinx.android.synthetic.main.activity_friend_requests.*
 

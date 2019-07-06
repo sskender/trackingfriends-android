@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
+import com.example.friendslocation.config.AppConstants
 import com.example.friendslocation.entity.User
-import com.example.friendslocation.misc.AppConstants
 import com.example.friendslocation.tasks.LoginUserTask
 import kotlinx.android.synthetic.main.login_view.*
 import java.lang.ref.WeakReference

@@ -5,8 +5,8 @@ import com.example.friendslocation.entity.UserPublicProfile
 /**
  * List used for adapters
  */
-object UserPublicProfileList {
+object UserListDao {
 
-    var list: MutableList<UserPublicProfile> = mutableListOf()
+    var publicProfileList: MutableList<UserPublicProfile> = mutableListOf()
 
 }

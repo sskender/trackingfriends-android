@@ -1,4 +1,4 @@
-package com.example.friendslocation.misc
+package com.example.friendslocation.config
 
 class AppConstants {
 

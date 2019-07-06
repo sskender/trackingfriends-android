@@ -1,5 +1,6 @@
 package com.example.friendslocation.adapter
 
+import android.os.AsyncTask
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.friendslocation.R
-import com.example.friendslocation.dao.UserPublicProfileList
+import com.example.friendslocation.dao.UserListDao
 import com.example.friendslocation.entity.UserPublicProfile
-import com.example.friendslocation.tasks.SendFriendRequestTask
+import com.example.friendslocation.net.RestFactory
 
 class SearchUsersAdapter(private val userPublicProfile: UserPublicProfile) :
     RecyclerView.Adapter<SearchUsersAdapter.SearchUserAdapterHolder>() {
@@ -24,11 +25,11 @@ class SearchUsersAdapter(private val userPublicProfile: UserPublicProfile) :
     }
 
     override fun getItemCount(): Int {
-        return UserPublicProfileList.list.size
+        return UserListDao.publicProfileList.size
     }
 
     override fun onBindViewHolder(p0: SearchUserAdapterHolder, p1: Int) {
-        val currentSearchUserPublicProfile: UserPublicProfile = UserPublicProfileList.list[p1]
+        val currentSearchUserPublicProfile: UserPublicProfile = UserListDao.publicProfileList[p1]
 
         // grab username from object
         p0.usernameText?.text = currentSearchUserPublicProfile.username
@@ -57,6 +58,20 @@ class SearchUsersAdapter(private val userPublicProfile: UserPublicProfile) :
         init {
             usernameText = itemView.findViewById(R.id.usernameTextView)
             addFriendImageButton = itemView.findViewById(R.id.addFriendImageButton)
+        }
+
+    }
+
+
+    /**
+     * Send friend request task
+     */
+    inner class SendFriendRequestTask(private val userId: String) : AsyncTask<String, Unit, Unit?>() {
+
+        override fun doInBackground(vararg p0: String): Unit? {
+            val rest = RestFactory.instance
+
+            return rest.sendFriendRequest(userId, p0[0])
         }
 
     }

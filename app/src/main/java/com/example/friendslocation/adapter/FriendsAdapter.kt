@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.friendslocation.R
-import com.example.friendslocation.dao.UserPublicProfileList
+import com.example.friendslocation.dao.UserListDao
 import com.example.friendslocation.entity.UserPublicProfile
 
 class FriendsAdapter(private val userPublicProfile: UserPublicProfile) :
@@ -22,11 +22,11 @@ class FriendsAdapter(private val userPublicProfile: UserPublicProfile) :
     }
 
     override fun getItemCount(): Int {
-        return UserPublicProfileList.list.size
+        return UserListDao.publicProfileList.size
     }
 
     override fun onBindViewHolder(p0: FriendAdapterHolder, p1: Int) {
-        val currentFriendRequestPublicProfile: UserPublicProfile = UserPublicProfileList.list[p1]
+        val currentFriendRequestPublicProfile: UserPublicProfile = UserListDao.publicProfileList[p1]
 
         // grab username from object
         p0.usernameText?.text = currentFriendRequestPublicProfile.username
