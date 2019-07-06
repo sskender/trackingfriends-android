@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.example.friendslocation.R
 import com.example.friendslocation.dao.UserPublicProfileList
 import com.example.friendslocation.entity.UserPublicProfile
@@ -36,7 +37,10 @@ class SearchUsersAdapter(private val userPublicProfile: UserPublicProfile) :
         p0.addFriendImageButton?.setOnClickListener {
             SendFriendRequestTask(userPublicProfile.userId).execute(currentSearchUserPublicProfile.userId)
 
-            // TODO change icon when friend request send
+            Toast.makeText(p0.itemView.context, "Friend added!", Toast.LENGTH_SHORT).show()
+
+            // disable button after click
+            p0.addFriendImageButton?.isClickable = false
         }
 
     }

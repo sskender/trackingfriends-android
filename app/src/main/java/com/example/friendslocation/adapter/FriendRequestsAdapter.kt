@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import com.example.friendslocation.R
 import com.example.friendslocation.dao.UserPublicProfileList
 import com.example.friendslocation.entity.UserPublicProfile
@@ -36,11 +37,21 @@ class FriendRequestsAdapter(private val userPublicProfile: UserPublicProfile) :
         // accept friend request
         p0.acceptFriendRequestButton?.setOnClickListener {
             AcceptFriendRequestTask(userPublicProfile.userId).execute(currentFriendRequestPublicProfile.userId)
+
+            Toast.makeText(p0.itemView.context, "Friend accepted!", Toast.LENGTH_SHORT).show()
+
+            UserPublicProfileList.list.remove(currentFriendRequestPublicProfile)
+            notifyDataSetChanged()
         }
 
         // deny friend request
         p0.denyFriendRequestButton?.setOnClickListener {
             DenyFriendRequestTask(userPublicProfile.userId).execute(currentFriendRequestPublicProfile.userId)
+
+            Toast.makeText(p0.itemView.context, "Friend denied!", Toast.LENGTH_SHORT).show()
+
+            UserPublicProfileList.list.remove(currentFriendRequestPublicProfile)
+            notifyDataSetChanged()
         }
 
     }
