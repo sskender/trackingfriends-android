@@ -18,7 +18,7 @@ object UserDataDao {
     var friendsList: MutableList<UserPublicProfile> = mutableListOf()
 
     /**
-     * User public profiles are saved here.
+     * Temporary user public profiles are saved here.
      *
      * E.g.:
      * - search users
@@ -27,8 +27,13 @@ object UserDataDao {
     var userPublicProfilesList: MutableList<UserPublicProfile> = mutableListOf()
 
     /**
+     * List of friends whose location is being tracked.
+     */
+    var trackingFriendsList: MutableList<UserPublicProfile> = mutableListOf()
+
+    /**
      * Friends locations are saved here.
      */
-    var friendLocationsList: MutableList<Location> = mutableListOf()
+    var locationsList: MutableList<Location> = mutableListOf()
 
 }

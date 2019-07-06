@@ -37,7 +37,7 @@ class FriendsActivity : AppCompatActivity() {
         friendsRecyclerView.adapter = friendsAdapter
 
 
-        // load friends
+        // load friends task
         // TODO save this to local database
         LoadFriendsTask().execute()
 

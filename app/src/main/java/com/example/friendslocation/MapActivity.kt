@@ -39,7 +39,7 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback {
 
         // add markers to map for all locations saved in dao
 
-        for (friendLocation: Location in UserDataDao.friendLocationsList) {
+        for (friendLocation: Location in UserDataDao.locationsList) {
 
             var friendMarker: LatLng = LatLng(friendLocation.latitude, friendLocation.longitude)
 

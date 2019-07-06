@@ -35,11 +35,12 @@ class FriendsAdapter(private val loggedInUser: UserPublicProfile) :
         // grab username from object
         p0.usernameText?.text = currentFriendRequestPublicProfile.username
 
-        // open map on tap
+        // tap friend to add it to tracking list
         p0.itemView.setOnClickListener {
+            UserDataDao.trackingFriendsList.add(currentFriendRequestPublicProfile)
             LoadFriendLocationTask().execute(currentFriendRequestPublicProfile)
 
-            Toast.makeText(p0.itemView.context, "Friend visible on map!", Toast.LENGTH_LONG).show()
+            Toast.makeText(p0.itemView.context, "Friend added to map!", Toast.LENGTH_LONG).show()
         }
 
         // delete friend button
@@ -82,7 +83,7 @@ class FriendsAdapter(private val loggedInUser: UserPublicProfile) :
 
         override fun onPostExecute(result: Location?) {
             if (result != null) {
-                UserDataDao.friendLocationsList.add(result)
+                UserDataDao.locationsList.add(result)
             }
 
             super.onPostExecute(result)
