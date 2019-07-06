@@ -13,7 +13,7 @@ import com.example.friendslocation.dao.UserDataDao
 import com.example.friendslocation.entity.UserPublicProfile
 import com.example.friendslocation.net.RestFactory
 
-class FriendRequestsAdapter(private val userPublicProfile: UserPublicProfile) :
+class FriendRequestsAdapter(private val loggedInUser: UserPublicProfile) :
     RecyclerView.Adapter<FriendRequestsAdapter.FriendRequestAdapterHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): FriendRequestAdapterHolder {
@@ -80,7 +80,7 @@ class FriendRequestsAdapter(private val userPublicProfile: UserPublicProfile) :
 
             UserDataDao.userPublicProfilesList.remove(p0[0])
 
-            return rest.acceptFriendRequest(userPublicProfile.userId, friendId)
+            return rest.acceptFriendRequest(loggedInUser.userId, friendId)
         }
 
         override fun onPostExecute(result: Unit?) {
@@ -103,7 +103,7 @@ class FriendRequestsAdapter(private val userPublicProfile: UserPublicProfile) :
 
             UserDataDao.userPublicProfilesList.remove(p0[0])
 
-            return rest.denyFriendRequest(userPublicProfile.userId, friendId)
+            return rest.denyFriendRequest(loggedInUser.userId, friendId)
         }
 
         override fun onPostExecute(result: Unit?) {

@@ -15,7 +15,7 @@ class FriendRequestsActivity : AppCompatActivity() {
 
     // here is stored profile of a currently logged in user
     // use it as reference for each api call
-    private lateinit var userPublicProfile: UserPublicProfile
+    private lateinit var loggedInUser: UserPublicProfile
 
     // adapter
     private lateinit var friendRequestsAdapter: FriendRequestsAdapter
@@ -27,12 +27,12 @@ class FriendRequestsActivity : AppCompatActivity() {
 
 
         // grab currently logged in user from activity extra
-        userPublicProfile = intent.extras?.get(AppConstants.USER_PROFILE_INTENT_EXTRA) as UserPublicProfile
+        loggedInUser = intent.extras?.get(AppConstants.USER_PROFILE_INTENT_EXTRA) as UserPublicProfile
 
 
         // set adapter
         friendRequestsRecyclerView.layoutManager = LinearLayoutManager(this)
-        friendRequestsAdapter = FriendRequestsAdapter(userPublicProfile)
+        friendRequestsAdapter = FriendRequestsAdapter(loggedInUser)
         friendRequestsRecyclerView.adapter = friendRequestsAdapter
 
 
@@ -62,7 +62,7 @@ class FriendRequestsActivity : AppCompatActivity() {
         override fun doInBackground(vararg p0: Unit?): List<UserPublicProfile>? {
             val rest = RestFactory.instance
 
-            return rest.getUserFriendRequests(userPublicProfile.userId)
+            return rest.getUserFriendRequests(loggedInUser.userId)
         }
 
     }

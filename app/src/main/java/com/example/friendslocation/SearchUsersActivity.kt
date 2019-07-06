@@ -15,7 +15,7 @@ class SearchUsersActivity : AppCompatActivity() {
 
     // here is stored profile of a currently logged in user
     // use it as reference for each api call
-    private lateinit var userPublicProfile: UserPublicProfile
+    private lateinit var loggedInUser: UserPublicProfile
 
     // adapter
     private lateinit var searchUsersAdapter: SearchUsersAdapter
@@ -27,12 +27,12 @@ class SearchUsersActivity : AppCompatActivity() {
 
 
         // grab currently logged in user from activity extra
-        userPublicProfile = intent.extras?.get(AppConstants.USER_PROFILE_INTENT_EXTRA) as UserPublicProfile
+        loggedInUser = intent.extras?.get(AppConstants.USER_PROFILE_INTENT_EXTRA) as UserPublicProfile
 
 
         // set adapter
         searchUsersRecyclerView.layoutManager = LinearLayoutManager(this)
-        searchUsersAdapter = SearchUsersAdapter(userPublicProfile)
+        searchUsersAdapter = SearchUsersAdapter(loggedInUser)
         searchUsersRecyclerView.adapter = searchUsersAdapter
 
 
@@ -55,7 +55,7 @@ class SearchUsersActivity : AppCompatActivity() {
         override fun doInBackground(vararg p0: String): List<UserPublicProfile>? {
             val rest = RestFactory.instance
 
-            return rest.searchUsersForFriends(userPublicProfile.userId, p0[0])
+            return rest.searchUsersForFriends(loggedInUser.userId, p0[0])
         }
 
         override fun onPostExecute(result: List<UserPublicProfile>?) {

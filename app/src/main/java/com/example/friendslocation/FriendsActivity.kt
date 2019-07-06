@@ -1,5 +1,6 @@
 package com.example.friendslocation
 
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -15,7 +16,7 @@ class FriendsActivity : AppCompatActivity() {
 
     // here is stored profile of a currently logged in user
     // use it as reference for each api call
-    private lateinit var userPublicProfile: UserPublicProfile
+    private lateinit var loggedInUser: UserPublicProfile
 
     // adapter
     private lateinit var friendsAdapter: FriendsAdapter
@@ -27,19 +28,26 @@ class FriendsActivity : AppCompatActivity() {
 
 
         // grab currently logged in user from activity extra
-        userPublicProfile = intent.extras?.get(AppConstants.USER_PROFILE_INTENT_EXTRA) as UserPublicProfile
+        loggedInUser = intent.extras?.get(AppConstants.USER_PROFILE_INTENT_EXTRA) as UserPublicProfile
 
 
         // set adapter
         friendsRecyclerView.layoutManager = LinearLayoutManager(this)
-        friendsAdapter = FriendsAdapter(userPublicProfile)
+        friendsAdapter = FriendsAdapter(loggedInUser)
         friendsRecyclerView.adapter = friendsAdapter
 
 
         // load friends
+        // TODO save this to local database
         LoadFriendsTask().execute()
 
-        // TODO save this to local database
+
+        // open map button
+        showMapButton.setOnClickListener {
+            var i: Intent = Intent(this, MapActivity::class.java)
+            startActivity(i)
+        }
+
     }
 
 
@@ -52,13 +60,13 @@ class FriendsActivity : AppCompatActivity() {
         override fun doInBackground(vararg p0: Unit?): List<UserPublicProfile>? {
             val rest = RestFactory.instance
 
-            return rest.getUserFriends(userPublicProfile.userId)
+            return rest.getUserFriends(loggedInUser.userId)
         }
 
         override fun onPostExecute(result: List<UserPublicProfile>?) {
 
             if (result != null) {
-                UserDataDao.userPublicProfilesList = result as MutableList<UserPublicProfile>
+                UserDataDao.friendsList = result as MutableList<UserPublicProfile>
             }
 
             // update adapter

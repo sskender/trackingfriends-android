@@ -21,7 +21,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     // here is stored profile of a currently logged in user
     // use it as reference for each api call
-    private lateinit var userPublicProfile: UserPublicProfile
+    private lateinit var loggedInUser: UserPublicProfile
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +31,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         // assign user profile
-        userPublicProfile = intent.extras?.get(AppConstants.USER_PROFILE_INTENT_EXTRA) as UserPublicProfile
+        loggedInUser = intent.extras?.get(AppConstants.USER_PROFILE_INTENT_EXTRA) as UserPublicProfile
 
 
 
@@ -95,7 +95,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                 val searchUsersActivityWithExtra = Intent(this, SearchUsersActivity::class.java)
 
-                searchUsersActivityWithExtra.putExtra(AppConstants.USER_PROFILE_INTENT_EXTRA, userPublicProfile)
+                searchUsersActivityWithExtra.putExtra(AppConstants.USER_PROFILE_INTENT_EXTRA, loggedInUser)
 
                 startActivity(searchUsersActivityWithExtra)
             }
@@ -104,7 +104,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                 val friendRequestsActivityWithExtra = Intent(this, FriendRequestsActivity::class.java)
 
-                friendRequestsActivityWithExtra.putExtra(AppConstants.USER_PROFILE_INTENT_EXTRA, userPublicProfile)
+                friendRequestsActivityWithExtra.putExtra(AppConstants.USER_PROFILE_INTENT_EXTRA, loggedInUser)
 
                 startActivity(friendRequestsActivityWithExtra)
             }
@@ -113,7 +113,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                 val friendsActivityWithExtra = Intent(this, FriendsActivity::class.java)
 
-                friendsActivityWithExtra.putExtra(AppConstants.USER_PROFILE_INTENT_EXTRA, userPublicProfile)
+                friendsActivityWithExtra.putExtra(AppConstants.USER_PROFILE_INTENT_EXTRA, loggedInUser)
 
                 startActivity(friendsActivityWithExtra)
             }

@@ -15,6 +15,12 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class MapActivity : FragmentActivity(), OnMapReadyCallback {
 
+
+    // TODO update user's current location loop
+
+    // TODO download friend's locations loop
+
+
     lateinit var map: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {

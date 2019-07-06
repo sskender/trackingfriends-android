@@ -14,7 +14,7 @@ import com.example.friendslocation.entity.Location
 import com.example.friendslocation.entity.UserPublicProfile
 import com.example.friendslocation.net.RestFactory
 
-class FriendsAdapter(private val userPublicProfile: UserPublicProfile) :
+class FriendsAdapter(private val loggedInUser: UserPublicProfile) :
     RecyclerView.Adapter<FriendsAdapter.FriendAdapterHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): FriendAdapterHolder {
@@ -26,11 +26,11 @@ class FriendsAdapter(private val userPublicProfile: UserPublicProfile) :
     }
 
     override fun getItemCount(): Int {
-        return UserDataDao.userPublicProfilesList.size
+        return UserDataDao.friendsList.size
     }
 
     override fun onBindViewHolder(p0: FriendAdapterHolder, p1: Int) {
-        val currentFriendRequestPublicProfile: UserPublicProfile = UserDataDao.userPublicProfilesList[p1]
+        val currentFriendRequestPublicProfile: UserPublicProfile = UserDataDao.friendsList[p1]
 
         // grab username from object
         p0.usernameText?.text = currentFriendRequestPublicProfile.username
@@ -77,7 +77,7 @@ class FriendsAdapter(private val userPublicProfile: UserPublicProfile) :
         override fun doInBackground(vararg p0: UserPublicProfile): Location? {
             val rest = RestFactory.instance
 
-            return rest.getFriendsLocation(userPublicProfile.userId, p0[0].userId)
+            return rest.getFriendsLocation(loggedInUser.userId, p0[0].userId)
         }
 
         override fun onPostExecute(result: Location?) {
@@ -100,9 +100,9 @@ class FriendsAdapter(private val userPublicProfile: UserPublicProfile) :
             val rest = RestFactory.instance
             val friendId: String = p0[0].userId
 
-            UserDataDao.userPublicProfilesList.remove(p0[0])
+            UserDataDao.friendsList.remove(p0[0])
 
-            return rest.deleteFriend(userPublicProfile.userId, friendId)
+            return rest.deleteFriend(loggedInUser.userId, friendId)
         }
 
         override fun onPostExecute(result: Unit?) {

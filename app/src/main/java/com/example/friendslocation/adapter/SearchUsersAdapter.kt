@@ -13,7 +13,7 @@ import com.example.friendslocation.dao.UserDataDao
 import com.example.friendslocation.entity.UserPublicProfile
 import com.example.friendslocation.net.RestFactory
 
-class SearchUsersAdapter(private val userPublicProfile: UserPublicProfile) :
+class SearchUsersAdapter(private val loggedInUser: UserPublicProfile) :
     RecyclerView.Adapter<SearchUsersAdapter.SearchUserAdapterHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): SearchUserAdapterHolder {
@@ -36,7 +36,7 @@ class SearchUsersAdapter(private val userPublicProfile: UserPublicProfile) :
 
         // send friend request
         p0.addFriendImageButton?.setOnClickListener {
-            SendFriendRequestTask(userPublicProfile.userId).execute(currentSearchUserPublicProfile.userId)
+            SendFriendRequestTask(loggedInUser.userId).execute(currentSearchUserPublicProfile.userId)
 
             Toast.makeText(p0.itemView.context, "Friend added!", Toast.LENGTH_SHORT).show()
 
