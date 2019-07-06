@@ -30,6 +30,9 @@ interface RestInterface {
     fun denyFriendRequest(userId: String, friendId: String): Unit?
 
 
+    fun deleteFriend(userId: String, friendId: String): Unit?
+
+
     fun updateUserLocation(location: Location): Location?
 
     fun getFriendsLocation(userId: String, friendId: String): Location?

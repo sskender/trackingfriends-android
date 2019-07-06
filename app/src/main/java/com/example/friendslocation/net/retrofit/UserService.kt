@@ -59,4 +59,11 @@ interface UserService {
         @Query("action") action: String
     ): Call<Unit>
 
+    @DELETE("user/{userId}/friends/{friendId}")
+    @Headers("Accept-Encoding: application/json")
+    fun deleteFriend(
+        @Path("userId") userId: String,
+        @Path("friendId") friendId: String
+    ): Call<Unit>
+
 }

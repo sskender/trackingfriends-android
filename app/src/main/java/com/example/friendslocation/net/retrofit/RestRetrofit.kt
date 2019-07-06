@@ -75,4 +75,8 @@ class RestRetrofit : RestInterface {
         return userService.sendFriendRequestAction(userId, friendId, AppConstants.FRIEND_DENY_REQUEST).execute().body()
     }
 
+    override fun deleteFriend(userId: String, friendId: String): Unit? {
+        return userService.deleteFriend(userId, friendId).execute().body()
+    }
+
 }
