@@ -8,10 +8,11 @@
         tools:context=".FriendRequestsActivity">
 
     <android.support.v7.widget.RecyclerView
-            android:layout_width="395dp"
-            android:layout_height="715dp" app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="200dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"
-            android:id="@+id/friendRequestsRecyclerView"/>
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/friendRequestsRecyclerView"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="75dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="16dp"/>
 </android.support.constraint.ConstraintLayout>
