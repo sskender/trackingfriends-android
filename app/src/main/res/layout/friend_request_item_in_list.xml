@@ -11,7 +11,8 @@
         <TextView
                 android:text="Friend request"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/friendRequestUsernameTextView"/>
+                android:layout_height="wrap_content" android:id="@+id/friendRequestUsernameTextView"
+                android:textSize="30sp"/>
     </LinearLayout>
     <Button
             android:text="ACCEPT"
