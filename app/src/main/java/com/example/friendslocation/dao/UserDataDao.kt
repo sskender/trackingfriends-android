@@ -26,14 +26,15 @@ object UserDataDao {
      */
     var userPublicProfilesList: MutableList<UserPublicProfile> = mutableListOf()
 
+
     /**
      * List of friends whose location is being tracked.
      */
-    var trackingFriendsList: MutableList<UserPublicProfile> = mutableListOf()
+    var trackingFriendsList: MutableSet<UserPublicProfile> = mutableSetOf()
 
     /**
      * Friends locations are saved here.
      */
-    var locationsList: MutableList<Location> = mutableListOf()
+    var locationsList: MutableSet<Location> = mutableSetOf()
 
 }

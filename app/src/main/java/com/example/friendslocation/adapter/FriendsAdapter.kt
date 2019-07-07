@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
@@ -17,6 +18,7 @@ import com.example.friendslocation.net.RestFactory
 class FriendsAdapter(private val loggedInUser: UserPublicProfile) :
     RecyclerView.Adapter<FriendsAdapter.FriendAdapterHolder>() {
 
+
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): FriendAdapterHolder {
         val context = p0.context
         val inflater = LayoutInflater.from(context)
@@ -25,29 +27,52 @@ class FriendsAdapter(private val loggedInUser: UserPublicProfile) :
         return FriendAdapterHolder(userListElement)
     }
 
+
     override fun getItemCount(): Int {
         return UserDataDao.friendsList.size
     }
 
+
     override fun onBindViewHolder(p0: FriendAdapterHolder, p1: Int) {
         val currentFriendRequestPublicProfile: UserPublicProfile = UserDataDao.friendsList[p1]
+
+        // show on map check box
+        p0.showFriendOnMapCheckBox?.setOnCheckedChangeListener { compoundButton, b ->
+
+            if (b) {
+                UserDataDao.trackingFriendsList.add(currentFriendRequestPublicProfile)
+
+                val msg = "Friend added to map!"
+                Toast.makeText(p0.itemView.context, msg, Toast.LENGTH_LONG).show()
+            } else {
+                if (UserDataDao.trackingFriendsList.contains(currentFriendRequestPublicProfile)) {
+                    UserDataDao.trackingFriendsList.remove(currentFriendRequestPublicProfile)
+                }
+
+                val msg = "Friend removed from map!"
+                Toast.makeText(p0.itemView.context, msg, Toast.LENGTH_LONG).show()
+            }
+
+        }
 
         // grab username from object
         p0.usernameText?.text = currentFriendRequestPublicProfile.username
 
         // tap friend to add it to tracking list
+        // TODO open map instead
         p0.itemView.setOnClickListener {
-            UserDataDao.trackingFriendsList.add(currentFriendRequestPublicProfile)
-            LoadFriendLocationTask().execute(currentFriendRequestPublicProfile)
-
-            Toast.makeText(p0.itemView.context, "Friend added to map!", Toast.LENGTH_LONG).show()
+            //            UserDataDao.trackingFriendsList.add(currentFriendRequestPublicProfile)
+//            LoadFriendLocationTask().execute(currentFriendRequestPublicProfile)
+//
+//            Toast.makeText(p0.itemView.context, "Friend added to map!", Toast.LENGTH_LONG).show()
         }
 
         // delete friend button
         p0.deleteButton?.setOnClickListener {
             DeleteFriendTask().execute(currentFriendRequestPublicProfile)
 
-            Toast.makeText(p0.itemView.context, "Unfriended!", Toast.LENGTH_SHORT).show()
+            val msg = "Unfriended!"
+            Toast.makeText(p0.itemView.context, msg, Toast.LENGTH_SHORT).show()
         }
 
     }
@@ -58,10 +83,12 @@ class FriendsAdapter(private val loggedInUser: UserPublicProfile) :
      */
     inner class FriendAdapterHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        var showFriendOnMapCheckBox: CheckBox? = null
         var usernameText: TextView? = null
         var deleteButton: ImageButton? = null
 
         init {
+            showFriendOnMapCheckBox = itemView.findViewById(R.id.showFriendOnMapCheckBox)
             usernameText = itemView.findViewById(R.id.friendRequestUsernameTextView)
             deleteButton = itemView.findViewById(R.id.deleteFriendImageButton)
         }
@@ -113,5 +140,6 @@ class FriendsAdapter(private val loggedInUser: UserPublicProfile) :
         }
 
     }
+
 
 }

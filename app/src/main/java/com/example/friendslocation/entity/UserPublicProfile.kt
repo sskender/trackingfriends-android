@@ -11,4 +11,21 @@ import java.io.Serializable
 data class UserPublicProfile(
     var userId: String,
     var username: String
-) : Serializable
+) : Serializable {
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as UserPublicProfile
+
+        if (userId != other.userId) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return userId.hashCode()
+    }
+
+}
