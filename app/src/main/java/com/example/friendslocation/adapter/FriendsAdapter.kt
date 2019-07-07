@@ -36,6 +36,10 @@ class FriendsAdapter(private val loggedInUser: UserPublicProfile) :
     override fun onBindViewHolder(p0: FriendAdapterHolder, p1: Int) {
         val currentFriendRequestPublicProfile: UserPublicProfile = UserDataDao.friendsList[p1]
 
+        // pre-check
+        p0.showFriendOnMapCheckBox?.isChecked =
+            UserDataDao.trackingFriendsList.contains(currentFriendRequestPublicProfile)
+
         // show on map check box
         p0.showFriendOnMapCheckBox?.setOnCheckedChangeListener { compoundButton, b ->
 
@@ -55,7 +59,7 @@ class FriendsAdapter(private val loggedInUser: UserPublicProfile) :
 
         }
 
-        // grab username from object
+        // show username
         p0.usernameText?.text = currentFriendRequestPublicProfile.username
 
         // tap friend to add it to tracking list
