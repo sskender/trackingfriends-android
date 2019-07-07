@@ -13,5 +13,5 @@
     <string name="find_new_friends">Find new friends</string>
     <string name="my_friends">My friends</string>
     <string name="show_map">SHOW MAP</string>
-    <string name="friend_hint">Tap a friend to show his location on the map</string>
+    <string name="friend_hint">Select a friend to show his location on the map</string>
 </resources>
