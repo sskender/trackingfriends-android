@@ -16,6 +16,7 @@ import com.example.friendslocation.net.RestFactory
 class FriendRequestsAdapter(private val loggedInUser: UserPublicProfile) :
     RecyclerView.Adapter<FriendRequestsAdapter.FriendRequestAdapterHolder>() {
 
+
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): FriendRequestAdapterHolder {
         val context = p0.context
         val inflater = LayoutInflater.from(context)
@@ -24,9 +25,11 @@ class FriendRequestsAdapter(private val loggedInUser: UserPublicProfile) :
         return FriendRequestAdapterHolder(userListElement)
     }
 
+
     override fun getItemCount(): Int {
         return UserDataDao.userPublicProfilesList.size
     }
+
 
     override fun onBindViewHolder(p0: FriendRequestAdapterHolder, p1: Int) {
         val currentFriendRequestPublicProfile: UserPublicProfile = UserDataDao.userPublicProfilesList[p1]
@@ -38,14 +41,16 @@ class FriendRequestsAdapter(private val loggedInUser: UserPublicProfile) :
         p0.acceptFriendRequestButton?.setOnClickListener {
             AcceptFriendRequestTask().execute(currentFriendRequestPublicProfile)
 
-            Toast.makeText(p0.itemView.context, "Friend accepted!", Toast.LENGTH_SHORT).show()
+            val msg = "Friend accepted!"
+            Toast.makeText(p0.itemView.context, msg, Toast.LENGTH_SHORT).show()
         }
 
         // deny friend request
         p0.denyFriendRequestButton?.setOnClickListener {
             DenyFriendRequestTask().execute(currentFriendRequestPublicProfile)
 
-            Toast.makeText(p0.itemView.context, "Friend denied!", Toast.LENGTH_SHORT).show()
+            val msg = "Friend denied!"
+            Toast.makeText(p0.itemView.context, msg, Toast.LENGTH_SHORT).show()
         }
 
     }
@@ -113,5 +118,6 @@ class FriendRequestsAdapter(private val loggedInUser: UserPublicProfile) :
         }
 
     }
+
 
 }

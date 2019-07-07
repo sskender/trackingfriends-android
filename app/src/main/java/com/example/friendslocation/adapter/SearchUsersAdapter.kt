@@ -16,6 +16,7 @@ import com.example.friendslocation.net.RestFactory
 class SearchUsersAdapter(private val loggedInUser: UserPublicProfile) :
     RecyclerView.Adapter<SearchUsersAdapter.SearchUserAdapterHolder>() {
 
+
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): SearchUserAdapterHolder {
         val context = p0.context
         val inflater = LayoutInflater.from(context)
@@ -24,9 +25,11 @@ class SearchUsersAdapter(private val loggedInUser: UserPublicProfile) :
         return SearchUserAdapterHolder(userListElement)
     }
 
+
     override fun getItemCount(): Int {
         return UserDataDao.userPublicProfilesList.size
     }
+
 
     override fun onBindViewHolder(p0: SearchUserAdapterHolder, p1: Int) {
         val currentSearchUserPublicProfile: UserPublicProfile = UserDataDao.userPublicProfilesList[p1]
@@ -38,7 +41,8 @@ class SearchUsersAdapter(private val loggedInUser: UserPublicProfile) :
         p0.addFriendImageButton?.setOnClickListener {
             SendFriendRequestTask(loggedInUser.userId).execute(currentSearchUserPublicProfile.userId)
 
-            Toast.makeText(p0.itemView.context, "Friend added!", Toast.LENGTH_SHORT).show()
+            val msg = "Friend request sent!"
+            Toast.makeText(p0.itemView.context, msg, Toast.LENGTH_SHORT).show()
 
             // disable button after click
             p0.addFriendImageButton?.isClickable = false
@@ -75,5 +79,6 @@ class SearchUsersAdapter(private val loggedInUser: UserPublicProfile) :
         }
 
     }
+
 
 }
