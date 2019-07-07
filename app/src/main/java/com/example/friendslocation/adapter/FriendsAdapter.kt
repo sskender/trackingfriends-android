@@ -34,23 +34,32 @@ class FriendsAdapter(private val loggedInUser: UserPublicProfile) :
 
 
     override fun onBindViewHolder(p0: FriendAdapterHolder, p1: Int) {
-        val currentFriendRequestPublicProfile: UserPublicProfile = UserDataDao.friendsList[p1]
+        val currentFriendPublicProfile: UserPublicProfile = UserDataDao.friendsList[p1]
 
         // pre-check
         p0.showFriendOnMapCheckBox?.isChecked =
-            UserDataDao.trackingFriendsList.contains(currentFriendRequestPublicProfile)
+            UserDataDao.trackingFriendsMap.keys.contains(currentFriendPublicProfile.userId)
 
         // show on map check box
         p0.showFriendOnMapCheckBox?.setOnCheckedChangeListener { compoundButton, b ->
 
             if (b) {
-                UserDataDao.trackingFriendsList.add(currentFriendRequestPublicProfile)
+                // friend's location is being tracked
+
+                UserDataDao.trackingFriendsMap[currentFriendPublicProfile.userId] = currentFriendPublicProfile
+                LoadFriendLocationTask().execute(currentFriendPublicProfile)
 
                 val msg = "Friend added to map!"
                 Toast.makeText(p0.itemView.context, msg, Toast.LENGTH_LONG).show()
             } else {
-                if (UserDataDao.trackingFriendsList.contains(currentFriendRequestPublicProfile)) {
-                    UserDataDao.trackingFriendsList.remove(currentFriendRequestPublicProfile)
+                // friend's location is not being tracked anymore
+
+                if (UserDataDao.trackingFriendsMap.containsKey(currentFriendPublicProfile.userId)) {
+                    UserDataDao.trackingFriendsMap.remove(currentFriendPublicProfile.userId)
+                }
+
+                if (UserDataDao.friendsLocationsMap.containsKey(currentFriendPublicProfile.userId)) {
+                    UserDataDao.friendsLocationsMap.remove(currentFriendPublicProfile.userId)
                 }
 
                 val msg = "Friend removed from map!"
@@ -60,20 +69,16 @@ class FriendsAdapter(private val loggedInUser: UserPublicProfile) :
         }
 
         // show username
-        p0.usernameText?.text = currentFriendRequestPublicProfile.username
+        p0.usernameText?.text = currentFriendPublicProfile.username
 
-        // tap friend to add it to tracking list
-        // TODO open map instead
+        // open map
         p0.itemView.setOnClickListener {
-            //            UserDataDao.trackingFriendsList.add(currentFriendRequestPublicProfile)
-//            LoadFriendLocationTask().execute(currentFriendRequestPublicProfile)
-//
-//            Toast.makeText(p0.itemView.context, "Friend added to map!", Toast.LENGTH_LONG).show()
+            // TODO open map here
         }
 
         // delete friend button
         p0.deleteButton?.setOnClickListener {
-            DeleteFriendTask().execute(currentFriendRequestPublicProfile)
+            DeleteFriendTask().execute(currentFriendPublicProfile)
 
             val msg = "Unfriended!"
             Toast.makeText(p0.itemView.context, msg, Toast.LENGTH_SHORT).show()
@@ -114,7 +119,7 @@ class FriendsAdapter(private val loggedInUser: UserPublicProfile) :
 
         override fun onPostExecute(result: Location?) {
             if (result != null) {
-                UserDataDao.locationsList.add(result)
+                UserDataDao.friendsLocationsMap[result.userId] = result
             }
 
             super.onPostExecute(result)

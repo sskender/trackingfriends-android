@@ -1,6 +1,5 @@
 package com.example.friendslocation
 
-import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -40,13 +39,6 @@ class FriendsActivity : AppCompatActivity() {
         // load friends task
         // TODO save this to local database
         LoadFriendsTask().execute()
-
-
-        // open map button
-        showMapButton.setOnClickListener {
-            var i: Intent = Intent(this, MapActivity::class.java)
-            startActivity(i)
-        }
 
     }
 

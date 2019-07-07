@@ -3,9 +3,6 @@ package com.example.friendslocation.dao
 import com.example.friendslocation.entity.Location
 import com.example.friendslocation.entity.UserPublicProfile
 
-/**
- * List used for adapters
- */
 object UserDataDao {
 
 
@@ -16,6 +13,7 @@ object UserDataDao {
      * User friends are saved here.
      */
     var friendsList: MutableList<UserPublicProfile> = mutableListOf()
+
 
     /**
      * Temporary user public profiles are saved here.
@@ -29,12 +27,11 @@ object UserDataDao {
 
     /**
      * List of friends whose location is being tracked.
+     * And their locations.
+     *
+     * String is user id so each location can be connected to username,
      */
-    var trackingFriendsList: MutableSet<UserPublicProfile> = mutableSetOf()
-
-    /**
-     * Friends locations are saved here.
-     */
-    var locationsList: MutableSet<Location> = mutableSetOf()
+    var trackingFriendsMap: MutableMap<String, UserPublicProfile> = mutableMapOf()
+    var friendsLocationsMap: MutableMap<String, Location?> = mutableMapOf()
 
 }

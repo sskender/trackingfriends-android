@@ -3,7 +3,6 @@ package com.example.friendslocation
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
-import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -36,18 +35,23 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         buttonMap.setOnClickListener { view ->
-            var i: Intent = Intent(this, MapActivity::class.java)
-            startActivity(i)
+
+            val mapActivityWithExtra = Intent(this, MapActivity::class.java)
+            mapActivityWithExtra.putExtra(AppConstants.USER_PROFILE_INTENT_EXTRA, loggedInUser)
+
+            startActivity(mapActivityWithExtra)
         }
 
 
-
+        /*
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
             var i:Intent = Intent(this, LoginActivity::class.java)
             startActivity(i)
         }
+        */
+
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
