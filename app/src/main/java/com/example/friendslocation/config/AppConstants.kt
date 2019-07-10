@@ -7,8 +7,8 @@ class AppConstants {
         // this ip is only valid for emulator
         //private const val SERVER_IP = "10.0.2.2"
 
-        private const val SERVER_IP = "192.168.1.4"
-        private const val SERVER_PORT = "8080"
+        private const val SERVER_IP = "trackingfriends-friendslocation.e4ff.pro-eu-west-1.openshiftapps.com"
+        private const val SERVER_PORT = "80"
 
         // server base url
         const val SERVER_URL: String = "http://$SERVER_IP:$SERVER_PORT/api/v1/"
